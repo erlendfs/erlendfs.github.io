@@ -1,0 +1,7 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1>Hallo verden</h1>
+<p>Ja vel ja riktig, mhm!</p>
+</body>
+</html>
