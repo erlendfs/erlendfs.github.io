@@ -25,7 +25,11 @@ iframe {
 	margin: auto;
 }
 h1 {
+<<<<<<< HEAD
 	font-family: Arial, Verdana, Times;
+=======
+	font-family:Arial, Verdana, "Times New Roman";
+>>>>>>> origin/master
 	text-align: center;
 	font-size: 35;
 }
@@ -51,6 +55,7 @@ a:link {
 a:visited {
 	color: #cc6600;
 }
+<<<<<<< HEAD
 .side {
 	display: inline-block;
 	margin-left: auto;
@@ -60,3 +65,5 @@ a:visited {
 #next2 {
 	text-align: center;
 }
+=======
+>>>>>>> origin/master
