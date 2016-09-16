@@ -29,6 +29,7 @@ h1 {
 	font-size: 35;
 }
 .jump{
+	font-family: Arial, Verdana, "Times New Roman";
 	font-size: 20;
 	position: fixed;
 	top: 10;
@@ -40,4 +41,12 @@ h2 {
 	bottom: 5;
 	right: 5;
 	z-index: 1;
+}
+
+a:link {
+	color: #cc6600;
+}
+
+a:visited {
+	color: #cc6600;
 }
