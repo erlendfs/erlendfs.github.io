@@ -1,0 +1,42 @@
+body{
+	background-color: #f0eae6;
+}
+	.container {
+    position: relative;
+}
+
+
+.vofs {
+	border: 1px solid #665544;
+	display: block;
+	margin: auto;
+    width: 80%;
+    height: auto;
+    opacity: 1;
+}
+img {
+	border: 2px solid #665544;
+	display: block;
+	margin: auto;
+}
+iframe {
+	border: 2px solid #665544;
+	display: block;
+	margin: auto;
+}
+h1 {
+	text-align: center;
+	font-size: 35;
+}
+.jump{
+	position: fixed;
+	bottom: 5;
+	right: 10;
+	z-index: 1;
+}
+h2 {
+	position: fixed;
+	bottom: 5;
+	right: 5;
+	z-index: 1;
+}
