@@ -1,18 +1,25 @@
 body{
 	background-color: #f0eae6;
 }
-	.container {
-    position: relative;
+
+.venstre {
+	float: left;
+	width: 20%;
 }
-
-
+.bilder {
+	float: left;
+	width: 70%;
+}
+.jump {
+	float: left;
+	width: 10%;
+}
 .vofs {
 	border: 1px solid #665544;
-	display: block;
+	/*display: block;
 	margin: auto;
-    width: 80%;
     height: auto;
-    opacity: 1;
+    opacity: 1;*/
 }
 img {
 	border: 2px solid #665544;
