@@ -21,11 +21,6 @@ body{
     height: auto;
     opacity: 1;*/
 }
-img {
-	border: 2px solid #665544;
-	display: block;
-	margin: auto;
-}
 iframe {
 	border: 2px solid #665544;
 	display: block;
