@@ -1,7 +1,28 @@
 body{
 	background-color: #f0eae6;
 }
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    position: fixed; /* Set the navbar to fixed position */
+    top: 0; /* Position the navbar at the top of the page */
+    width: 100%; /* Full width */
+}
 
+li {
+    float: left;
+    font-size: 18;
+}
+
+li a {
+    display: block;
+    color: white;
+    padding: 16px;
+    text-decoration: none;
+}
 .venstre {
 	float: left;
 	width: 20%;
