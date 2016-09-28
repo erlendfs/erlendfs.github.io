@@ -5,14 +5,17 @@ body{
 .venstre {
 	float: left;
 	width: 20%;
+	background-color: red;
 }
 .bilder {
 	float: left;
 	width: 70%;
+	background-color: orange;
 }
 .jump {
 	float: left;
 	width: 10%;
+	background-color: yellow;
 }
 .vofs {
 	border: 1px solid #665544;
