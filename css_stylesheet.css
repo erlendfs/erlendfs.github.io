@@ -5,27 +5,20 @@ body{
 .venstre {
 	float: left;
 	width: 20%;
-	background-color: red;
 }
 .bilder {
 	float: left;
 	width: 70%;
-	background-color: orange;
 }
 .jump {
 	float: left;
 	width: 10%;
-	background-color: yellow;
 	position: fixed;
 	right: 0px;
 }
-.vofs {
+img {
 	border: 1px solid #665544;
 	width: 100%;
-	/*display: block;
-	margin: auto;
-    height: auto;
-    opacity: 1;*/
 }
 iframe {
 	border: 2px solid #665544;
