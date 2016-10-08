@@ -3,9 +3,18 @@
 <title>ErlendFS</title>
 <head>
 <link rel="stylesheet" type="text/css" href="erlendfs.github.io/css_stylesheet.css">
+<meta charset=utf-8 />
+  <title></title>
+  <script src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
+  <link href='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css' rel='stylesheet' />
+  <style>
+    body { margin:0; padding:0; }
+    .map { position:absolute; top:0; bottom:0; width:100%; }
+  </style>
 </head>
 <body>
 <ul>
+	<li><a href="index.html">Home</a></li>
   <li><a href="hampton.html">Hampton Court Palace</a></li>
   <li><a href="centre.html">City Centre</a></li>
   <li><a href="room.html">The Studio</a></li>
@@ -14,15 +23,81 @@
 </ul>
 <h1>Bildebloggen</h1>
 
-<div class="venstre">
-	<p>usikker ass</p>
-	<p>katter er kule</p>
-</div>
 
 
 
 
 
 
+<div id='map-four' class='map'> </div>
+<script>
+L.mapbox.accessToken = 'pk.eyJ1IjoiZXJsZW5kZnMiLCJhIjoiV1B2UEl6byJ9.Yr7uvQJDoP1TafmI96gDWw';
+var geojson = {
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.33405303955078125,
+          51.402846836892195
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.3033256530761719,
+          51.40627356817536
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.12396097183227539,
+          51.5011026711586
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.13080596923828125,
+          51.50218460704925
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.13926029205322263,
+          51.50175717865563
+        ]
+      }
+    }
+  ]
+};
+var map = L.mapbox.map('map-four', 'mapbox.dark', {
+  scrollWheelZoom: false
+}).setView([51.45, -0.2], 12);
+
+var myLayer = L.mapbox.featureLayer().addTo(map);
+myLayer.setGeoJSON(geojson);
+</script>
 
 </body>
