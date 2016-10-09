@@ -29,7 +29,7 @@ li a {
 }
 .bilder {
 	float: left;
-	width: 70%;
+	width: 80%;
 }
 .jump {
 	float: left;
@@ -80,6 +80,6 @@ a:visited {
 	float: left;
 }
 iframe {
-	height: 100%;
-	width: 95%;
+	height: 90%;
+	width: 90%;
 }
