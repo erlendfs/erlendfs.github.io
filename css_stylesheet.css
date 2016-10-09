@@ -79,3 +79,6 @@ a:visited {
 	font-size: 20;
 	float: left;
 }
+iframe {
+	height: 600px;
+}
