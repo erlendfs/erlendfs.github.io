@@ -88,3 +88,11 @@ iframe {
 	text-align: center;
 	font-size: 20;
 }
+#en {
+	float: left;
+	width: 28%;
+}
+#to {
+	float: left;
+	width: 70%;
+}
