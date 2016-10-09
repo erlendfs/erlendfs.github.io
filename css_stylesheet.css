@@ -83,3 +83,8 @@ iframe {
 	height: 100%;
 	width: 95%;
 }
+.bildetekst {
+	font-family: Arial, Verdana, Times;
+	text-align: center;
+	font-size: 15;
+}
