@@ -28,7 +28,7 @@ li a {
 	width: 20%;
 }
 .bilder {
-	float: left;
+	/*float: left;*/
 	width: 80%;
 }
 .jump {
@@ -48,10 +48,12 @@ iframe {
 }
 h1 {
 	font-family: Arial, Verdana, Times;
-	text-align: center;
 	font-size: 35;
-}
+	float: right;
+	margin-right: 30;
+	color: white;
 
+}
 h2 {
 	position: fixed;
 	bottom: 5;
