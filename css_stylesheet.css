@@ -46,7 +46,7 @@ iframe {
 	display: block;
 	margin: auto;
 }
-h1 {
+li h1 {
 	font-family: Arial, Verdana, Times;
 	font-size: 35;
 	float: right;
