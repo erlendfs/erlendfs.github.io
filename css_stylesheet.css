@@ -40,6 +40,7 @@ li a {
 img {
 	border: 1px solid #665544;
 	width: 80%;
+	margin-right: -50%;
 }
 h1	{
 	font-size: 18;
