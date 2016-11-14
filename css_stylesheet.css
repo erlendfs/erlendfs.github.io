@@ -39,7 +39,7 @@ li a {
 }
 img {
 	border: 1px solid #665544;
-	width: 100%;
+	width: 80%;
 }
 iframe {
 	border: 2px solid #665544;
@@ -48,7 +48,7 @@ iframe {
 }
 h1	{
 	font-size: 18;
-	
+
 }
 #plis{
 	font-family: Arial, Verdana, Times;
