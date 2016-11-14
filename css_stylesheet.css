@@ -12,7 +12,7 @@ ul {
     width: 100%; /* Full width */
 }
 
-li {
+#vennstre {
     float: left;
     font-size: 18;
 }
