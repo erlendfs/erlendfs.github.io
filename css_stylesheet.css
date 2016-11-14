@@ -46,14 +46,14 @@ iframe {
 	display: block;
 	margin: auto;
 }
-li h1 {
+#plis{
 	font-family: Arial, Verdana, Times;
 	font-size: 35;
 	float: right;
 	margin-right: 30;
 	color: white;
-
 }
+
 h2 {
 	position: fixed;
 	bottom: 5;
