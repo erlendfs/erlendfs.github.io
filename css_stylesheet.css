@@ -89,5 +89,7 @@ a:visited {
 }
 #About {
 	font-family: Arial, Verdana, Times;
-	font-size: 15;
+	font-size: 20;
+	padding-top: 5px;
+	padding-left: 5px;
 }
