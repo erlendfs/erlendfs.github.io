@@ -89,7 +89,7 @@ a:visited {
 }
 #About {
 	font-family: Arial, Verdana, Times;
-	font-size: 22;
+	font-size: 20;
 	padding-left: 1cm;
-	padding-top: 1cm;
+	`/*padding-top: 1cm;*/
 }
