@@ -90,6 +90,6 @@ a:visited {
 #About {
 	font-family: Arial, Verdana, Times;
 	font-size: 22;
-	left: 10;
-	top: 20;
+	padding-left: 10;
+	padding-top: 20;
 }
