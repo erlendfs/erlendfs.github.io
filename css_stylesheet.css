@@ -87,3 +87,9 @@ a:visited {
 	text-align: center;
 	font-size: 20;
 }
+#About {
+	font-family: Arial, Verdana, Times;
+	font-size: 22;
+	left: 10;
+	top: 20;
+}
