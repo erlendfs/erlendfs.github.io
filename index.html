@@ -1,47 +1,70 @@
-<!--Denne siden har som formål å vise et utvalg av mine egne bilder på 100% av siden -->
-<html lang="no">
-<title>ErlendFS</title>
+<!DOCTYPE html>
+<html>
 <head>
-<link rel="stylesheet" type="text/css" href="erlendfs.github.io/css_stylesheet.css">
-<meta charset=utf-8 />
-  <title></title>
-  <script src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
-  <link href='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css' rel='stylesheet' />
-  <style>
-    body { margin:0; padding:0; }
-    .map { position:absolute; top:53; bottom:0; width:100%; }
-  </style>
+<meta charset="UTF-8">
+<title>20180104103914</title>
+<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" type="text/css" href="./Qgis2threejs.css">
 </head>
 <body>
-<ul>
-	<li id="vennstre"><a href="index.html">Home</a></li>
-  <li id="vennstre"><a href="hampton.html">Hampton Court Palace</a></li>
-  <li id="vennstre"><a href="centre.html">City Centre</a></li>
-  <!--
-  <li><a href="various.html">Various</a></li>
--->
-  <li id="vennstre"><a href="night.html">Night Photography</a></li>
-  <li id="vennstre"><a href="nature.html">Nature</a></li>
-  <li id="vennstre"><a href="sports.html">Sports Photography</a></li>  
-  <li id="plis"><h1>Bildebloggen</h1></li>
+<div id="webgl"></div>
 
-</ul>
-<br>
-<br>
-<!--
-  <div>
-    <p id="About">Welcome to my photography website!<br>
-        The website has different categories of photos that you can choose from in the menu on the top of the page</p>
+<!-- popup -->
+<div id="popup" style="display:none;">
+<div id="closebtn">&times;</div>
+<div id="popupbar"></div>
+<div id="popupbody">
+ <div id="popupcontent"></div>
+ <div id="pageinfo">
+  <h1>Current View URL</h1>
+  <div><input id="urlbox" type="text"></div>
+
+  <h1>Usage</h1>
+  <div id="usage"></div>
+
+  <h1>About</h1>
+  <div id="about">This page was made with <a href="http://www.qgis.org/" target="_blank">QGIS</a> and <a href="https://github.com/minorua/Qgis2threejs" target="_blank">Qgis2threejs</a> plugin, 
+and uses the following library:
+  <ul>
+  <li>three.js <a href="http://threejs.org/" target="_blank">http://threejs.org/</a> <a href="./threejs/LICENSE" target="_blank" class="license">(LICENSE)</a></li>
+  <li>dat-gui <a href="https://code.google.com/p/dat-gui/" target="_blank">https://code.google.com/p/dat-gui/</a> <a href="./dat-gui/license.txt" target="_blank" class="license">(LICENSE)</a></li>
+  <li id="lib_proj4js" style="display: none;">Proj4js <a href="http://trac.osgeo.org/proj4js/" target="_blank">http://trac.osgeo.org/proj4js/</a> <a href="./proj4js/LICENSE.md" target="_blank" class="license">(LICENSE)</a></li>
+  </ul>
   </div>
--->	
-<p></p>
-<br>
+ </div>
+</div></div>
 
-<iframe width="830" height="360" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" title="Skoler" src="//sarpsborg.maps.arcgis.com/apps/Embed/index.html?webmap=f33a31df251b4313bfc0d15311495a3f&amp;extent=10.5397,59.0936,11.6705,59.4445&amp;home=true&amp;zoom=true&amp;previewImage=false&amp;scale=true&amp;search=true&amp;searchextent=true&amp;disable_scroll=false&amp;theme=light"></iframe>
-	
-	
-<p></p>
-	
+<!-- footer -->
+<div id="footer"></div>
 
-	
+<script src="./threejs/three.min.js"></script>
+<script src="./Qgis2threejs.js"></script>
+<script src="./threejs/OrbitControls.js"></script>
+<script>
+var option = Q3D.Options;
+
+</script>
+<script src="./20180104103914.js"></script>
+<script>
+if (typeof proj4 !== "undefined") document.getElementById("lib_proj4js").style.display = "list-item";
+
+var container = document.getElementById("webgl");
+// initialize application
+var app = Q3D.application;
+app.init(container);
+
+// load the project
+app.loadProject(project);
+
+app.addEventListeners();
+app.start();
+
+</script>
+<script src="./dat-gui/dat.gui.min.js"></script>
+<script src="./dat-gui_panel.js"></script>
+<script>
+// initialize dat-gui panel
+Q3D.gui.init();
+</script>
 </body>
+</html>
