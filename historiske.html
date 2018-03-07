@@ -179,6 +179,7 @@
 
         var bakgrunnskart = {"Google Street": googleMLayer};
 
+
 		basemaps = {
 		    '1947': L.tileLayer.wms('http://waapi.webatlas.no/wms-orto-hist/?APITOKEN=29045b22-fd9b-4ee7-8c20-95da7094ea1f&', {
 		    	layers: 'Sarpsborg-1947', format:'image/png', transparent: 'true'
@@ -199,6 +200,7 @@
 		var liste = ["Google", "1947", "1952", "1963", "1978"];
 
 		L.control.layers(bakgrunnskart, basemaps).addTo(map);
+
 
 		var slider = document.getElementById("myRange");
 
@@ -221,7 +223,10 @@
 				map.removeLayer(basemaps[liste[i]])
 				}
 			};
-			
+
+
+
+
 			var verdi = this.value-1;
 			//Skriver inn i websiden hvilket lag som nå er aktivt
 			aarid.innerHTML = "År: "
@@ -233,10 +238,10 @@
 			}
 			else {
 				basemaps[objektnavn].addTo(map);
+
 			}
-			
-			L.tileLayer.wms('https://openwms.statkart.no/skwms1/wms.fkb4graatone?', {
-				layers: 'fkb_presentasjonsdata', format:'image/png', transparent: 'true', version: '1.3.0'
+			L.tileLayer.wms('https://openwms.statkart.no/skwms1/wms.norges_grunnkart_graatone?', {
+				layers: 'Stedsnavn', format:'image/png', transparent: 'true', version: '1.3.0'
 			}).addTo(map).bringToFront();
 
 			
