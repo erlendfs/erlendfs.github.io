@@ -158,20 +158,12 @@
 		    padding: 7px 16px;
 		}
 
-
-		.forrige {
-		    background-color: #f1f1f1;
-		    color: black;
-		}
-
-		.neste {
-		    background-color: #eb8a82;
-		    color: black;
-		}
-
 		.rund {
 		    border-radius: 50%;
-		    border: solid 1px black
+		    border: solid 1px black;
+		    background-color:#eb8a82;
+		    color: white;
+
 		}
 		
 
@@ -284,9 +276,6 @@
 				}
 			};
 
-
-
-
 			var verdi = this.value-1;
 			//Skriver inn i websiden hvilket lag som nå er aktivt
 			aarid.innerHTML = "År: "
@@ -302,11 +291,7 @@
 				var nameLayer = L.tileLayer.wms('https://openwms.statkart.no/skwms1/wms.norges_grunnkart_graatone?', {
 					layers: 'Stedsnavn', format:'image/png', transparent: 'true', version: '1.3.0'
 				}).addTo(map).bringToFront();
-
 			}
-
-
-			
 		};
 
 
