@@ -180,7 +180,7 @@
 			<span id="spanleft">Historiske ortofoto</span>
 			<span id="spanright">
 				<a href="http://www.Sarpsborg.com">
-					<img src="http://www.sarpsborg.com/globalassets/blokker-i-artikler/layout/img/sarpsborg-kommune.png">
+					<img src="http://www.sarpsborg.com/globalassets/blokker-i-artikler/layout/img/sarpsborg-kommune.png" target="_blank">
 				</a>
 			</span>
 		</div>
@@ -192,9 +192,9 @@
 
 
 		<div class="slidecontainer">
-		  	
-		  	<input type="range" min="1" max="5" value="1" class="slider" id="myRange">
+		  	<input type="range" min="0" max="18" value="0" class="slider" id="myRange">
 		</div>
+
 		<div id="infoDiv">
 			<div id="aarstallcontainer"><p><b><span id="aarID">År: </span></b><span id="aarstall"></span></p></div>
 			<div id="fotocontainer"></div>
@@ -210,7 +210,7 @@
 
     <script type="text/javascript">
     	var aar = $('#aarstall');
-    	 //$("#myRange").val(3);
+    	 
 
     	var googleMLayer = L.tileLayer(
            'http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
@@ -233,23 +233,79 @@
 
 
 		basemaps = {
+			'1938': L.tileLayer.wms('http://waapi.webatlas.no/wms-orto-hist/?APITOKEN=29045b22-fd9b-4ee7-8c20-95da7094ea1f&', {
+		    	layers: 'Sarpsborg-1938', format:'image/png', transparent: 'true'
+		    }),
+
+			'1939': L.tileLayer.wms('http://waapi.webatlas.no/wms-orto-hist/?APITOKEN=29045b22-fd9b-4ee7-8c20-95da7094ea1f&', {
+		    	layers: 'Sarpsborg-1939', format:'image/png', transparent: 'true'
+		    }),
+
 		    '1947': L.tileLayer.wms('http://waapi.webatlas.no/wms-orto-hist/?APITOKEN=29045b22-fd9b-4ee7-8c20-95da7094ea1f&', {
 		    	layers: 'Sarpsborg-1947', format:'image/png', transparent: 'true'
+		    }),
+
+			'1948': L.tileLayer.wms('http://waapi.webatlas.no/wms-orto-hist/?APITOKEN=29045b22-fd9b-4ee7-8c20-95da7094ea1f&', {
+		    	layers: 'Sarpsborg-1948', format:'image/png', transparent: 'true'
 		    }),
 
 		    '1952': L.tileLayer.wms('http://waapi.webatlas.no/wms-orto-hist/?APITOKEN=29045b22-fd9b-4ee7-8c20-95da7094ea1f&', {
 		    	layers: 'Sarpsborg-1952', format:'image/png', transparent: 'true'
 		    }),
 
+			'1955': L.tileLayer.wms('http://waapi.webatlas.no/wms-orto-hist/?APITOKEN=29045b22-fd9b-4ee7-8c20-95da7094ea1f&', {
+		    	layers: 'Sarpsborg-1955', format:'image/png', transparent: 'true'
+		    }),
+
+			'1957': L.tileLayer.wms('http://waapi.webatlas.no/wms-orto-hist/?APITOKEN=29045b22-fd9b-4ee7-8c20-95da7094ea1f&', {
+		    	layers: 'Sarpsborg-1957', format:'image/png', transparent: 'true'
+		    }),
+
+			'1962': L.tileLayer.wms('http://waapi.webatlas.no/wms-orto-hist/?APITOKEN=29045b22-fd9b-4ee7-8c20-95da7094ea1f&', {
+		    	layers: 'Sarpsborg-1962', format:'image/png', transparent: 'true'
+		    }),
+
 		    '1963': L.tileLayer.wms('http://waapi.webatlas.no/wms-orto-hist/?APITOKEN=29045b22-fd9b-4ee7-8c20-95da7094ea1f&', {
 		        layers: 'Sarpsborg-1963', format:'image/png', transparent: 'true'
 		    }),
 
+			'1966': L.tileLayer.wms('http://waapi.webatlas.no/wms-orto-hist/?APITOKEN=29045b22-fd9b-4ee7-8c20-95da7094ea1f&', {
+		    	layers: 'Sarpsborg-1966', format:'image/png', transparent: 'true'
+		    }),
+
+			'1975': L.tileLayer.wms('http://waapi.webatlas.no/wms-orto-hist/?APITOKEN=29045b22-fd9b-4ee7-8c20-95da7094ea1f&', {
+		    	layers: 'Sarpsborg-1975', format:'image/png', transparent: 'true'
+		    }),
+
 		    '1978': L.tileLayer.wms('http://waapi.webatlas.no/wms-orto-hist/?APITOKEN=29045b22-fd9b-4ee7-8c20-95da7094ea1f&', {
 		        layers: 'Sarpsborg-1978', format:'image/png', transparent: 'true'
-		    })
+		    }),
+
+			'1987': L.tileLayer.wms('http://waapi.webatlas.no/wms-orto-hist/?APITOKEN=29045b22-fd9b-4ee7-8c20-95da7094ea1f&', {
+		    	layers: 'Sarpsborg-1987', format:'image/png', transparent: 'true'
+		    }),
+
+			'1988': L.tileLayer.wms('http://waapi.webatlas.no/wms-orto-hist/?APITOKEN=29045b22-fd9b-4ee7-8c20-95da7094ea1f&', {
+		    	layers: 'Sarpsborg-1988', format:'image/png', transparent: 'true'
+		    }),
+
+			'1991': L.tileLayer.wms('http://waapi.webatlas.no/wms-orto-hist/?APITOKEN=29045b22-fd9b-4ee7-8c20-95da7094ea1f&', {
+		    	layers: 'Sarpsborg-1991', format:'image/png', transparent: 'true'
+		    }),
+
+			'2003': L.tileLayer.wms('http://waapi.webatlas.no/wms-orto-hist/?APITOKEN=29045b22-fd9b-4ee7-8c20-95da7094ea1f&', {
+		    	layers: 'Sarpsborg-2003', format:'image/png', transparent: 'true'
+		    }),
+
+			'2007': L.tileLayer.wms('http://waapi.webatlas.no/wms-orto-hist/?APITOKEN=29045b22-fd9b-4ee7-8c20-95da7094ea1f&', {
+		    	layers: 'Sarpsborg-2007', format:'image/png', transparent: 'true'
+		    }),
+
+			'2010': L.tileLayer.wms('http://waapi.webatlas.no/wms-orto-hist/?APITOKEN=29045b22-fd9b-4ee7-8c20-95da7094ea1f&', {
+		    	layers: 'Sarpsborg-2010', format:'image/png', transparent: 'true'
+		    }),
 		};
-		var liste = ["Google", "1947", "1952", "1963", "1978"];
+		var liste = ["Google", "1938", "1939", "1947", "1948", "1952", "1955", "1957", "1962", "1963", "1966", "1975", "1978", "1987", "1988", "1991", "2003", "2007", "2010"];
 
 		L.control.layers(bakgrunnskart, basemaps).addTo(map);
 
@@ -258,13 +314,16 @@
 
 		var output = document.getElementById("aarstall");
 		var aarid = document.getElementById("aarID");
-		output.innerHTML = slider.value;
+		aarid.innerHTML = "";
+		output.innerHTML = "Google";
+
 
 		//console.log(slider.value);
 		if (slider.value == 1) {
 			output.innerHTML = "Google";
 			aarid.innerHTML = "";
 		}
+
 
 		slider.oninput = function() {
 			//For-løkka iterer gjennom alle lagnavnene hver gang du beveger slideren
@@ -276,7 +335,7 @@
 				}
 			};
 
-			var verdi = this.value-1;
+			var verdi = this.value;
 			//Skriver inn i websiden hvilket lag som nå er aktivt
 			aarid.innerHTML = "År: "
 			output.innerHTML = liste[verdi];
@@ -288,12 +347,73 @@
 			else {
 				basemaps[objektnavn].addTo(map);
 
-				var nameLayer = L.tileLayer.wms('https://openwms.statkart.no/skwms1/wms.norges_grunnkart_graatone?', {
-					layers: 'Stedsnavn', format:'image/png', transparent: 'true', version: '1.3.0'
+				var nameLayer = L.tileLayer.wms('https://wms.geonorge.no/skwms1/wms.topo3?', {
+					layers: 'N50Stedsnavn', format:'image/png', transparent: 'true', version: '1.3.0'
 				}).addTo(map).bringToFront();
 			}
 		};
 
+		$(".neste").on('click', function () {
+			console.log($("#myRange").val());
+			var what=Number($("#myRange").val());
+			if (what < liste.length-1) {
+				var nyval = what+1;
+				console.log("ja");
+				for (var i = 0; i < liste.length; i++) {
+					//If setningen sjekker om det aktuelle laget finnes i kartet
+					//Dersom laget finnes i kartet fjernes det, slik at ingen lag er aktive når et nytt lag skal legges inn etter for-løkken
+					if (map.hasLayer(basemaps[liste[i]])) {
+						map.removeLayer(basemaps[liste[i]]);
+					}
+				};
+				output.innerHTML = liste[nyval];
+				var objektnavn = liste[nyval];
+				//Legger til det aktuelle årstallet. 
+				if (objektnavn == "Google") {
+					aarid.innerHTML = "";
+				}
+				else {
+					aarid.innerHTML = "År: "
+					basemaps[objektnavn].addTo(map);
+
+					var nameLayer = L.tileLayer.wms('https://openwms.statkart.no/skwms1/wms.norges_grunnkart_graatone?', {
+						layers: 'Stedsnavn', format:'image/png', transparent: 'true', version: '1.3.0'
+					}).addTo(map).bringToFront();
+				}
+				$("#myRange").val(String(nyval));
+			}
+		});
+
+		$(".forrige").on('click', function () {
+			console.log($("#myRange").val());
+			var what=Number($("#myRange").val());
+			if (what > 0) {
+				var nyval = what-1;
+				console.log("ja");
+				for (var i = 0; i < liste.length; i++) {
+					//If setningen sjekker om det aktuelle laget finnes i kartet
+					//Dersom laget finnes i kartet fjernes det, slik at ingen lag er aktive når et nytt lag skal legges inn etter for-løkken
+					if (map.hasLayer(basemaps[liste[i]])) {
+						map.removeLayer(basemaps[liste[i]]);
+					}
+				};
+				output.innerHTML = liste[nyval];
+				var objektnavn = liste[nyval];
+				//Legger til det aktuelle årstallet. 
+				if (objektnavn == "Google") {
+					aarid.innerHTML = "";
+				}
+				else {
+					aarid.innerHTML = "År: "
+					basemaps[objektnavn].addTo(map);
+
+					var nameLayer = L.tileLayer.wms('https://openwms.statkart.no/skwms1/wms.norges_grunnkart_graatone?', {
+						layers: 'Stedsnavn', format:'image/png', transparent: 'true', version: '1.3.0'
+					}).addTo(map).bringToFront();
+				}
+				$("#myRange").val(String(nyval));
+			}
+		});
 
 
 
