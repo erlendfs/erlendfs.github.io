@@ -60,7 +60,7 @@
     		height: 400px
     	}
     	#mapDiv {
-    		height: 70%;
+    		height: 83%;
     		width: 100%;
     	}
 
@@ -68,7 +68,7 @@
 		    -webkit-appearance: none;
 		    max-width: 80%;
 		    height: 15px;
-		    float: left;
+		    float: right;
 		    margin-top: 10px;
 		    border-radius: 5px;   
 		    background: #d3d3d3;
@@ -97,14 +97,13 @@
 		}
 		.slidecontainer {
 			margin-top: 5px;
-			margin-bottom: 5px;
 			width: 100%;
 			float: left;
 		}
 
 		#aarstallcontainer {
 			position: relative;
-			float: right;
+			float: left;
 			width: 20%;
 			background-color: white;
 			border-radius: 10px;
@@ -120,18 +119,6 @@
 		 	margin-right: 4px;
 		 	vertical-align: middle;
 		 	/*display: inline-block;*/
-		}
-		#labels {
-			float: left;
-			width: 80%;
-    		display: table;
-    		table-layout: fixed;    /* For cells of equal size */
-		}
-		#labels span {
-			font-family: sans-serif;
-			font-size: 10px;
-			display: table-cell;
-    		text-align: center;
 		}
 		
 
@@ -157,32 +144,12 @@
 	   	<div id="mapDiv">  </div>
 
 
-		<div id="labels">
-			<span>01</span>
-			<span>02</span>
-			<span>03</span>
-			<span>04</span>
-			<span>05</span>
-			<span>01</span>
-			<span>02</span>
-			<span>03</span>
-			<span>04</span>
-			<span>05</span>
-			<span>01</span>
-			<span>02</span>
-			<span>03</span>
-			<span>04</span>
-			<span>05</span>
-			<span>01</span>
-			<span>02</span>
-			<span>03</span>
-		</div>
+
 
 		<div class="slidecontainer">
-		  	<input type="range" min="1" max="5" value="1" class="slider" id="myRange">
 		  	<div id="aarstallcontainer"><p><b><span id="aarID">År: </span></b><span id="aarstall"></span></p></div>
+		  	<input type="range" min="1" max="5" value="1" class="slider" id="myRange">
 		</div>
-
 	</div>
 
 
