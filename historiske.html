@@ -386,11 +386,11 @@
 		};
 
 		$(".neste").on('click', function () {
-			console.log($("#myRange").val());
+			//console.log($("#myRange").val());
 			var what=Number($("#myRange").val());
 			if (what < liste.length-1) {
 				var nyval = what+1;
-				console.log("ja");
+
 				for (var i = 0; i < liste.length; i++) {
 					//If setningen sjekker om det aktuelle laget finnes i kartet
 					//Dersom laget finnes i kartet fjernes det, slik at ingen lag er aktive når et nytt lag skal legges inn etter for-løkken
@@ -417,11 +417,11 @@
 		});
 
 		$(".forrige").on('click', function () {
-			console.log($("#myRange").val());
+			//console.log($("#myRange").val());
 			var what=Number($("#myRange").val());
 			if (what > 0) {
 				var nyval = what-1;
-				console.log("ja");
+
 				for (var i = 0; i < liste.length; i++) {
 					//If setningen sjekker om det aktuelle laget finnes i kartet
 					//Dersom laget finnes i kartet fjernes det, slik at ingen lag er aktive når et nytt lag skal legges inn etter for-løkken
