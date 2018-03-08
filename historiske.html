@@ -60,16 +60,17 @@
     		height: 400px
     	}
     	#mapDiv {
-    		height: 83%;
+    		height: 70%;
     		width: 100%;
     	}
 
     	.slider {
 		    -webkit-appearance: none;
-		    max-width: 80%;
+		    max-width: 100%;
 		    height: 15px;
 		    float: right;
 		    margin-top: 10px;
+		    margin-bottom: 10px
 		    border-radius: 5px;   
 		    background: #d3d3d3;
 		    outline: none;
@@ -97,14 +98,24 @@
 		}
 		.slidecontainer {
 			margin-top: 5px;
+			margin-bottom: 15px;
 			width: 100%;
 			float: left;
 		}
 
+		#infoDiv {
+			width: 100%;
+			text-align: center; 
+		}
+		#infoDiv > div {
+			width: calc(100% / 3.5);
+			display: inline-block;
+			vertical-align: top;
+			text-align: center;
+		}
+
 		#aarstallcontainer {
 			position: relative;
-			float: left;
-			width: 20%;
 			background-color: white;
 			border-radius: 10px;
 			border: 3px solid #eb8a82;
@@ -119,6 +130,48 @@
 		 	margin-right: 4px;
 		 	vertical-align: middle;
 		 	/*display: inline-block;*/
+		}
+
+		#fotocontainer {
+			display: inline-block;
+			background-color: white;
+			border-radius: 10px;
+			border: 3px solid #eb8a82;
+			height: 30px;
+			margin-top: 3px;
+			margin-left:8px;
+			margin-right: 8px;
+
+		}
+
+		#knappeDiv {
+			position: relative;
+			display: inline-block;
+
+			/*margin-top: 3px; */
+			height: 30px;
+
+		}
+		#knappeDiv a {
+		    text-decoration: none;
+		    display: inline-block;
+		    padding: 7px 16px;
+		}
+
+
+		.forrige {
+		    background-color: #f1f1f1;
+		    color: black;
+		}
+
+		.neste {
+		    background-color: #eb8a82;
+		    color: black;
+		}
+
+		.rund {
+		    border-radius: 50%;
+		    border: solid 1px black
 		}
 		
 
@@ -147,8 +200,17 @@
 
 
 		<div class="slidecontainer">
-		  	<div id="aarstallcontainer"><p><b><span id="aarID">År: </span></b><span id="aarstall"></span></p></div>
+		  	
 		  	<input type="range" min="1" max="5" value="1" class="slider" id="myRange">
+		</div>
+		<div id="infoDiv">
+			<div id="aarstallcontainer"><p><b><span id="aarID">År: </span></b><span id="aarstall"></span></p></div>
+			<div id="fotocontainer"></div>
+			<div id="knappeDiv">
+				<a href="#" class="forrige rund">&#8249;</a>
+				<a href="#" class="neste rund">&#8250;</a>
+			</div>
+			
 		</div>
 	</div>
 
@@ -156,7 +218,7 @@
 
     <script type="text/javascript">
     	var aar = $('#aarstall');
-    	
+    	 //$("#myRange").val(3);
 
     	var googleMLayer = L.tileLayer(
            'http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
@@ -174,8 +236,7 @@
             layers: [googleMLayer]
         });  
 
-        $(window).on("resize", function () { $("#map").height($(window).height()); map.invalidateSize(); }).trigger("resize");
-
+ 
         var bakgrunnskart = {"Google Street": googleMLayer};
 
 
