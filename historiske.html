@@ -220,11 +220,8 @@
     	var aar = $('#aarstall');
     	 
 
-    	var googleMLayer = L.tileLayer(
-           'http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
-           attribution: 'Map data &copy; ' + '<a href="http://maps.google.com">Google Maps</a>',
-           maxZoom: 20,
-           subdomains:['mt0','mt1','mt2','mt3']
+    	var topo2 = L.tileLayer('http://opencache.statkart.no/gatekeeper/gk/gk.open_gmaps?layers=topo2&zoom={z}&x={x}&y={y}', {
+            attribution: '<a href="http://www.kartverket.no/">Kartverket</a>'
         });
 
         var map = L.map(mapDiv, {
@@ -233,11 +230,11 @@
             zoom: 13,
             maxZoom:18,
             //Legg til lag her for å vise når appen starter
-            layers: [googleMLayer]
+            layers: [topo2]
         });  
 
  
-        var bakgrunnskart = {"Google Street": googleMLayer};
+        var bakgrunnskart = {"Google Street": topo2};
 
 
 		basemaps = {
