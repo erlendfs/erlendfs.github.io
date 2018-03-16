@@ -5,7 +5,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
     <!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -236,27 +238,27 @@
 
 		basemaps = {
 			'1938': L.tileLayer.wms('http://waapi.webatlas.no/wms-orto-hist/?APITOKEN=29045b22-fd9b-4ee7-8c20-95da7094ea1f&', {
-		    	layers: 'Sarpsborg-1938', format:'image/png', transparent: 'true'
+		    	layers: 'Sarpsborg-1938', format:'image/png', transparent: 'true', reuseTiles: 'true', keepBuffer: '0'
 		    }),
 
 			'1939': L.tileLayer.wms('http://waapi.webatlas.no/wms-orto-hist/?APITOKEN=29045b22-fd9b-4ee7-8c20-95da7094ea1f&', {
-		    	layers: 'Sarpsborg-1939', format:'image/png', transparent: 'true'
+		    	layers: 'Sarpsborg-1939', format:'image/png', transparent: 'true', reuseTiles: 'true', keepBuffer: '0'
 		    }),
 
 		    '1947': L.tileLayer.wms('http://waapi.webatlas.no/wms-orto-hist/?APITOKEN=29045b22-fd9b-4ee7-8c20-95da7094ea1f&', {
-		    	layers: 'Sarpsborg-1947', format:'image/png', transparent: 'true'
+		    	layers: 'Sarpsborg-1947', format:'image/png', transparent: 'true', reuseTiles: 'true', keepBuffer: '0'
 		    }),
 
 			'1948': L.tileLayer.wms('http://waapi.webatlas.no/wms-orto-hist/?APITOKEN=29045b22-fd9b-4ee7-8c20-95da7094ea1f&', {
-		    	layers: 'Sarpsborg-1948', format:'image/png', transparent: 'true'
+		    	layers: 'Sarpsborg-1948', format:'image/png', transparent: 'true', reuseTiles: 'true', keepBuffer: '0'
 		    }),
 
 		    '1952': L.tileLayer.wms('http://waapi.webatlas.no/wms-orto-hist/?APITOKEN=29045b22-fd9b-4ee7-8c20-95da7094ea1f&', {
-		    	layers: 'Sarpsborg-1952', format:'image/png', transparent: 'true'
+		    	layers: 'Sarpsborg-1952', format:'image/png', transparent: 'true', reuseTiles: 'true', keepBuffer: '0'
 		    }),
 
 			'1955': L.tileLayer.wms('http://waapi.webatlas.no/wms-orto-hist/?APITOKEN=29045b22-fd9b-4ee7-8c20-95da7094ea1f&', {
-		    	layers: 'Sarpsborg-1955', format:'image/png', transparent: 'true'
+		    	layers: 'Sarpsborg-1955', format:'image/png', transparent: 'true', reuseTiles: 'true', keepBuffer: '0'
 		    }),
 
 			'1957': L.tileLayer.wms('http://waapi.webatlas.no/wms-orto-hist/?APITOKEN=29045b22-fd9b-4ee7-8c20-95da7094ea1f&', {
@@ -370,6 +372,7 @@
 				aarid.innerHTML = "";
 			}
 			else {
+				
 				basemaps[objektnavn].addTo(map);
 				fotoel.innerHTML = fotodato[objektnavn];
 
@@ -401,6 +404,7 @@
 				else {
 					aarid.innerHTML = "År: "
 					basemaps[objektnavn].addTo(map);
+					fotoel.innerHTML = fotodato[objektnavn];
 
 					var nameLayer = L.tileLayer.wms('https://wms.geonorge.no/skwms1/wms.topo3?', {
 						layers: 'N50Stedsnavn', format:'image/png', transparent: 'true', version: '1.3.0'
@@ -432,7 +436,7 @@
 				else {
 					aarid.innerHTML = "År: "
 					basemaps[objektnavn].addTo(map);
-
+					fotoel.innerHTML = fotodato[objektnavn];
 					var nameLayer = L.tileLayer.wms('https://wms.geonorge.no/skwms1/wms.topo3?', {
 						layers: 'N50Stedsnavn', format:'image/png', transparent: 'true', version: '1.3.0'
 					}).addTo(map).bringToFront();
