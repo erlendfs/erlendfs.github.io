@@ -184,7 +184,7 @@
 			<span id="spanleft">Historiske ortofoto</span>
 			<span id="spanright">
 				<a href="http://www.Sarpsborg.com">
-					<img src="http://www.sarpsborg.com/globalassets/blokker-i-artikler/layout/img/sarpsborg-kommune.png" target="_blank">
+					<img src="https://www.sarpsborg.com/globalassets/blokker-i-artikler/layout/img/sarpsborg-kommune.png" target="_blank">
 				</a>
 			</span>
 		</div>
@@ -235,77 +235,79 @@
  
         var bakgrunnskart = {"Norgeskart": topo2};
 
+        var webatlasUrl = 'https://waapi.webatlas.no/wms-orto-hist/?APITOKEN=29045b22-fd9b-4ee7-8c20-95da7094ea1f&';
+
 
 		basemaps = {
-			'1938': L.tileLayer.wms('http://waapi.webatlas.no/wms-orto-hist/?APITOKEN=29045b22-fd9b-4ee7-8c20-95da7094ea1f&', {
+			'1938': L.tileLayer.wms(webatlasUrl, {
 		    	layers: 'Sarpsborg-1938', format:'image/png', transparent: 'true', reuseTiles: 'true', keepBuffer: '0'
 		    }),
 
-			'1939': L.tileLayer.wms('http://waapi.webatlas.no/wms-orto-hist/?APITOKEN=29045b22-fd9b-4ee7-8c20-95da7094ea1f&', {
+			'1939': L.tileLayer.wms(webatlasUrl, {
 		    	layers: 'Sarpsborg-1939', format:'image/png', transparent: 'true', reuseTiles: 'true', keepBuffer: '0'
 		    }),
 
-		    '1947': L.tileLayer.wms('http://waapi.webatlas.no/wms-orto-hist/?APITOKEN=29045b22-fd9b-4ee7-8c20-95da7094ea1f&', {
+		    '1947': L.tileLayer.wms(webatlasUrl, {
 		    	layers: 'Sarpsborg-1947', format:'image/png', transparent: 'true', reuseTiles: 'true', keepBuffer: '0'
 		    }),
 
-			'1948': L.tileLayer.wms('http://waapi.webatlas.no/wms-orto-hist/?APITOKEN=29045b22-fd9b-4ee7-8c20-95da7094ea1f&', {
+			'1948': L.tileLayer.wms(webatlasUrl, {
 		    	layers: 'Sarpsborg-1948', format:'image/png', transparent: 'true', reuseTiles: 'true', keepBuffer: '0'
 		    }),
 
-		    '1952': L.tileLayer.wms('http://waapi.webatlas.no/wms-orto-hist/?APITOKEN=29045b22-fd9b-4ee7-8c20-95da7094ea1f&', {
+		    '1952': L.tileLayer.wms(webatlasUrl, {
 		    	layers: 'Sarpsborg-1952', format:'image/png', transparent: 'true', reuseTiles: 'true', keepBuffer: '0'
 		    }),
 
-			'1955': L.tileLayer.wms('http://waapi.webatlas.no/wms-orto-hist/?APITOKEN=29045b22-fd9b-4ee7-8c20-95da7094ea1f&', {
+			'1955': L.tileLayer.wms(webatlasUrl, {
 		    	layers: 'Sarpsborg-1955', format:'image/png', transparent: 'true', reuseTiles: 'true', keepBuffer: '0'
 		    }),
 
-			'1957': L.tileLayer.wms('http://waapi.webatlas.no/wms-orto-hist/?APITOKEN=29045b22-fd9b-4ee7-8c20-95da7094ea1f&', {
+			'1957': L.tileLayer.wms(webatlasUrl, {
 		    	layers: 'Sarpsborg-1957', format:'image/png', transparent: 'true'
 		    }),
 
-			'1962': L.tileLayer.wms('http://waapi.webatlas.no/wms-orto-hist/?APITOKEN=29045b22-fd9b-4ee7-8c20-95da7094ea1f&', {
+			'1962': L.tileLayer.wms(webatlasUrl, {
 		    	layers: 'Sarpsborg-1962', format:'image/png', transparent: 'true'
 		    }),
 
-		    '1963': L.tileLayer.wms('http://waapi.webatlas.no/wms-orto-hist/?APITOKEN=29045b22-fd9b-4ee7-8c20-95da7094ea1f&', {
+		    '1963': L.tileLayer.wms(webatlasUrl, {
 		        layers: 'Sarpsborg-1963', format:'image/png', transparent: 'true'
 		    }),
 
-			'1966': L.tileLayer.wms('http://waapi.webatlas.no/wms-orto-hist/?APITOKEN=29045b22-fd9b-4ee7-8c20-95da7094ea1f&', {
+			'1966': L.tileLayer.wms(webatlasUrl, {
 		    	layers: 'Sarpsborg-1966', format:'image/png', transparent: 'true'
 		    }),
 
-			'1975': L.tileLayer.wms('http://waapi.webatlas.no/wms-orto-hist/?APITOKEN=29045b22-fd9b-4ee7-8c20-95da7094ea1f&', {
+			'1975': L.tileLayer.wms(webatlasUrl, {
 		    	layers: 'Sarpsborg-1975', format:'image/png', transparent: 'true'
 		    }),
 
-		    '1978': L.tileLayer.wms('http://waapi.webatlas.no/wms-orto-hist/?APITOKEN=29045b22-fd9b-4ee7-8c20-95da7094ea1f&', {
+		    '1978': L.tileLayer.wms(webatlasUrl, {
 		        layers: 'Sarpsborg-1978', format:'image/png', transparent: 'true'
 		    }),
 
-			'1987': L.tileLayer.wms('http://waapi.webatlas.no/wms-orto-hist/?APITOKEN=29045b22-fd9b-4ee7-8c20-95da7094ea1f&', {
+			'1987': L.tileLayer.wms(webatlasUrl, {
 		    	layers: 'Sarpsborg-1987', format:'image/png', transparent: 'true'
 		    }),
 
-			'1988': L.tileLayer.wms('http://waapi.webatlas.no/wms-orto-hist/?APITOKEN=29045b22-fd9b-4ee7-8c20-95da7094ea1f&', {
+			'1988': L.tileLayer.wms(webatlasUrl, {
 		    	layers: 'Sarpsborg-1988', format:'image/png', transparent: 'true'
 		    }),
 
-			'1991': L.tileLayer.wms('http://waapi.webatlas.no/wms-orto-hist/?APITOKEN=29045b22-fd9b-4ee7-8c20-95da7094ea1f&', {
+			'1991': L.tileLayer.wms(webatlasUrl, {
 		    	layers: 'Sarpsborg-1991', format:'image/png', transparent: 'true'
 		    }),
 
-			'2003': L.tileLayer.wms('http://waapi.webatlas.no/wms-orto-hist/?APITOKEN=29045b22-fd9b-4ee7-8c20-95da7094ea1f&', {
+			'2003': L.tileLayer.wms(webatlasUrl, {
 		    	layers: 'Ostfold-2003', format:'image/png', transparent: 'true'
 		    }),
 
-			'2007': L.tileLayer.wms('http://waapi.webatlas.no/wms-orto-hist/?APITOKEN=29045b22-fd9b-4ee7-8c20-95da7094ea1f&', {
+			'2007': L.tileLayer.wms(webatlasUrl, {
 		    	layers: 'Ostfold-vest-2007', format:'image/png', transparent: 'true'
 		    }),
 
-			'2010': L.tileLayer.wms('http://waapi.webatlas.no/wms-orto-hist/?APITOKEN=29045b22-fd9b-4ee7-8c20-95da7094ea1f&', {
+			'2010': L.tileLayer.wms(webatlasUrl, {
 		    	layers: 'Ostfold-Vestfold-2010', format:'image/png', transparent: 'true'
 		    }),
 		};
@@ -352,6 +354,7 @@
 
 
 		slider.oninput = function() {
+
 			//For-løkka iterer gjennom alle lagnavnene hver gang du beveger slideren
 			for (var i = 0; i < liste.length; i++) {
 				//If setningen sjekker om det aktuelle laget finnes i kartet
@@ -373,7 +376,13 @@
 			}
 			else {
 				
-				basemaps[objektnavn].addTo(map);
+				sessionStorage.setItem("katter", JSON.stringify(basemaps[objektnavn]));
+
+				var sesjon = JSON.parse(sessionStorage.getItem("katter"));
+				var funcgrevling = eval('(' + sesjon + ')');
+				console.log(funcgrevling);
+				//funcgrevling.addTo(map);
+				//basemaps[objektnavn].addTo(map);
 				fotoel.innerHTML = fotodato[objektnavn];
 
 				var nameLayer = L.tileLayer.wms('https://wms.geonorge.no/skwms1/wms.topo3?', {
