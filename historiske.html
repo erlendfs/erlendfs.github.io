@@ -375,14 +375,14 @@
 				aarid.innerHTML = "";
 			}
 			else {
-				
+				/*
 				sessionStorage.setItem("katter", JSON.stringify(basemaps[objektnavn]));
 
 				var sesjon = JSON.parse(sessionStorage.getItem("katter"));
 				var funcgrevling = eval('(' + sesjon + ')');
-				console.log(funcgrevling);
+				console.log(funcgrevling);*/
 				//funcgrevling.addTo(map);
-				//basemaps[objektnavn].addTo(map);
+				basemaps[objektnavn].addTo(map);
 				fotoel.innerHTML = fotodato[objektnavn];
 
 				var nameLayer = L.tileLayer.wms('https://wms.geonorge.no/skwms1/wms.topo3?', {
