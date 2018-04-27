@@ -32,7 +32,7 @@
       top: 142px;
       left: 15px;
       z-index: 50;
-      background-image: url(https://raw.githubusercontent.com/erlendfs/erlendfs.github.io/master/Img/swipebutton4.jpg);
+      background-image: url(./img/swipebutton4.jpg);
     }
     .btn-group {
       position: absolute;
@@ -43,10 +43,12 @@
       z-index: 50;
     }
     .dropdown-menu {
+      width: 100%
+    }
+    .scrollable-menu {
+      height: auto;
       max-height: 200px;
       overflow-x: hidden;
-      z-index: 50;
-      right: 15px;
     }
 
   </style>
@@ -169,29 +171,24 @@
       <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Velg fotoår
       </button>
-      <div class="dropdown-menu scrollable-menu" role="menu">
-        <div>hallo</div>
-        <div class="divider"></div>
-        <div>hei</div>
-        <div class="divider"></div>
-        <div>hei</div>
-        <div class="divider"></div>
-        <div>hallo</div>
-        <div class="divider"></div>
-        <div>hei</div>
-        <div class="divider"></div>
-        <div>hei</div>
-        <div class="divider"></div>
-        <div>hei</div>
-        <div class="divider"></div>
-        <div>hei</div>
-        <div class="divider"></div>
-        <div>hallo</div>
-        <div class="divider"></div>
-        <div>hei</div>
-        <div class="divider"></div>
-        <div>hei</div>
-      </div>
+      <ul class="dropdown-menu scrollable-menu" role="menu">
+        <li>hallo</li>
+        <li class="divider"></li>
+        <li>hei</li>
+        <li class="divider"></li>
+        <li>hallo</li>
+        <li class="divider"></li>
+        <li>hei</li>
+        <li class="divider"></li>
+        <li>hallo</li>
+        <li class="divider"></li>
+        <li>hei</li>
+        <li class="divider"></li>
+        <li>hallo</li>
+        <li class="divider"></li>
+        <li>hei</li>
+        <li class="divider"></li>
+      </ul>
     </div>
   </div>
 
