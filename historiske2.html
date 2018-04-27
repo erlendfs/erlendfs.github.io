@@ -45,6 +45,9 @@
     .dropdown-menu {
       width: 100%
     }
+    .dropdown-menu li {
+      text-align: center;
+    }
     .scrollable-menu {
       height: auto;
       max-height: 200px;
@@ -82,30 +85,43 @@
         var lagene = map.layerIds;
         console.log(lagene);
        // console.log(lagene[1]);
-
-
-        //map.getLayer(lagene[3]).hide();
-        var swipeLayer = map.getLayer(lagene[1]);
-
-        //Aktiverer det laget som skal brukes i sveipingen. 
-        function createSwipe(swipeAar) {
-          //Bruk swipeAar til å sette op swipe-widget med riktig årstall. Format på swipeAar: swipeAar = map.getLayer(lagene[1]);
-
-          swipeAar.show();
-          swipeWidget = new LayerSwipe({
-            type: "vertical",  //Try switching to "scope" or "horizontal"
-            map: map,
-            layers: [swipeAar]
-          }, "swipeDiv");
-          console.log(swipeWidget);
-          swipeWidget.startup();
-          swipeWidget.disable();
-        };
-
-        createSwipe(swipeLayer);
-
         map.getLayer(lagene[1]).hide();
         map.getLayer(lagene[2]).hide();
+        //map.getLayer(lagene[3]).hide();
+        var swipeLayer = map.getLayer(lagene[1]);
+        console.log("swipeLayer: " + lagene[1]);
+
+        swipeLayer.show();
+        swipeWidget = new LayerSwipe({
+          type: "vertical",  //Try switching to "scope" or "horizontal"
+          map: map,
+          layers: [swipeLayer]
+        }, "swipeDiv");
+        //console.log(swipeWidget);
+        swipeWidget.startup();
+        swipeWidget.disable();
+
+        
+        //Aktiverer det laget som skal brukes i sveipingen. 
+        function createSwipe(swipeAar) {
+          console.log(swipeAar);
+          var swipeAarLag = map.getLayer(swipeAar);
+          swipeAarLag.show();
+          swipeWidget.layers=[swipeAarLag];
+          console.log("Starter..")
+          swipeWidget.startup();
+
+          console.log("Har startet..")
+        };
+        
+        //createSwipe(swipeLayer);
+
+        console.log("SjekkHer");
+        console.log(layers[0]);
+        console.log(lagene[1]);
+        //map.getLayer(layers[0].title).hide();
+        //map.getLayer(lagene[1]).hide();
+        //map.getLayer(lagene[2]).hide();
 
 
         $("#SwipeButton").on("click", function() {
@@ -125,42 +141,43 @@
           console.log($("#SwipeButton").attr('class'));
         });
 
-        
-        function velgaar() {
+
+     
+        function velgAar(nyttAar) {
+          
           console.log("kjører 'velgaar'");
-          if ($("#SwipeButton").attr("class") ==="inActive") {
-            for (i = 0; i < lagene.length; i++) {
-              if (lagene[i]!="GeocacheBilder_9229") {
-                if (lagene[i].visible) {
-                  lagene[i].hide()
-                }
+          console.log(nyttAar);
+          if ($("#SwipeButton").attr("class") ==="Active") {
+            console.log("active")
+            for (i = 0; i < layers.length; i++) {
+              console.log("iterasjon "+i);
+              if (map.getLayer(layers[i].id).visible) {
+                //Dersom laget er synlig, skru det av. 
+                console.log("Ikke bakgrunsskart og Visible")
+                map.getLayer(layers[i].id).hide();
+              }
+              if (layers[i].title == nyttAar) {
+                console.log("Ødelegg SwipeWidget");
+                createSwipe(layers[i].id);
+                console.log("Widget har blitt laget");
+                swipeWidget.enable();
+                console.log("Widget har blitt enablet. ")
               }
             }
+          }
+          else {
+            console.log("Ikkenoe")
           }
         };
 
         var verdi1 = $("#nr1").attr("value");
         console.log(verdi1);
-        //$("#nr1").click(velgaar());
-
-
-        array.some(layers, function(layer){
-          console.log("Lagnavn: " + layer.title + "\t\t ID: " + layer.id)
-          if(layer.title === title){
-            id = layer.id;
-            if(layer.featureCollection && layer.featureCollection.layers.length){
-              id = layer.featureCollection.layers[0].id;
-            }
-            return true;  
-          }else{
-            return false;
-          }
+        $("#nr1").on("click", function() {
+          velgAar(verdi1);
         });
-        //get the layer from the map using the id and set it as the swipe layer. 
-        //if(id){
-
-          //.destroy() lukker widgeten
-          //swipeWidget.destroy();
+        $("#nr2").on("click", function() {
+          velgAar();
+        });
 
 
           //Home button pan'er til lagret oppstartposisjon for WebMapet. 
@@ -187,7 +204,7 @@
         Velg fotoår
       </button>
       <ul class="dropdown-menu scrollable-menu" role="menu">
-        <li id="nr1" value=1991>den første</li>
+        <li id="nr1" value="Hist1991">den første</li>
         <li class="divider"></li>
         <li id="nr2" value=2001>den andre</li>
         <li class="divider"></li>
