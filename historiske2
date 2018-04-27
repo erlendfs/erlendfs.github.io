@@ -1,0 +1,201 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
+  <title>Layer Swipe</title>
+  <link rel="stylesheet" href="https://js.arcgis.com/3.24/esri/themes/calcite/dijit/calcite.css">
+  <link rel="stylesheet" href="https://js.arcgis.com/3.24/esri/themes/calcite/esri/esri.css">
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+  integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+  crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <style>
+    html, body, #map {
+      padding:0;
+      margin:0;
+      height:100%;
+      position:relative;
+    }
+    #HomeButton {
+      position: absolute;
+      top: 95px;
+      left: 15px;
+      z-index: 50;
+    }
+    #SwipeButton {
+      position: absolute;
+      height: 32px;
+      width: 32px;
+      top: 142px;
+      left: 15px;
+      z-index: 50;
+      background-image: url(./img/swipebutton4.jpg);
+    }
+    .btn-group {
+      position: absolute;
+      height: 40px;
+      bottom: 15px;
+      left: 15px;
+      height: auto;
+      z-index: 50;
+    }
+    .dropdown-menu {
+      max-height: 200px;
+      overflow-x: hidden;
+      z-index: 50;
+      right: 15px;
+    }
+
+  </style>
+  <script src="https://js.arcgis.com/3.24/"></script>
+  <script>
+
+    require([
+      "esri/map", 
+      "esri/dijit/LayerSwipe",
+      "esri/layers/layer",
+      "esri/arcgis/utils",
+      "dojo/_base/array",
+      "esri/dijit/HomeButton",
+      "dojo/domReady!"
+    ], function(
+      Map, LayerSwipe, layer, arcgisUtils, array, HomeButton
+    )  {
+
+      var mapDeferred = arcgisUtils.createMap("604b8670fb8c4ce6be5d2ab0e85eabb6", "map");
+      mapDeferred.then(function(response){
+
+        var id;
+        var map = response.map;
+        var title = "";
+        
+        //loop through all the operational layers in the web map 
+        //to find the one with the specified title;
+        var layers = response.itemInfo.itemData.operationalLayers;
+        console.log(layers);
+        
+        var lagene = map.layerIds;
+        console.log(lagene);
+       // console.log(lagene[1]);
+
+
+        //map.getLayer(lagene[3]).hide();
+        var swipeLayer = map.getLayer(lagene[1]);
+
+        //Aktiverer det laget som skal brukes i sveipingen. 
+        function createSwipe(swipeAar) {
+          //Bruk swipeAar til å sette op swipe-widget med riktig årstall. Format på swipeAar: swipeAar = map.getLayer(lagene[1]);
+
+          swipeAar.show();
+          swipeWidget = new LayerSwipe({
+            type: "vertical",  //Try switching to "scope" or "horizontal"
+            map: map,
+            layers: [swipeAar]
+          }, "swipeDiv");
+          console.log(swipeWidget);
+          swipeWidget.startup();
+          swipeWidget.disable();
+        };
+
+        createSwipe(swipeLayer);
+
+        map.getLayer(lagene[1]).hide();
+        map.getLayer(lagene[2]).hide();
+
+
+        $("#SwipeButton").on("click", function() {
+          if ($("#SwipeButton").attr("class") ==="inActive") {
+            $("#SwipeButton").attr('class', 'Active')    
+            /*Her kan du skrive koden for å aktivere Swiping med et bestemt lag*/ 
+            map.getLayer(lagene[1]).show();
+            swipeWidget.enable();
+          }
+
+          else if ($("#SwipeButton").attr("class") ==="Active") {
+            $("#SwipeButton").attr('class', 'inActive')
+            /*Her kan du skrive kode for å skru av Swipe-funksjonaliteten*/
+            swipeWidget.disable();
+            map.getLayer(lagene[1]).hide();
+          }
+          console.log($("#SwipeButton").attr('class'));
+        });
+
+        
+
+
+
+        array.some(layers, function(layer){
+          console.log("Lagnavn: " + layer.title + "\t\t ID: " + layer.id)
+          if(layer.title === title){
+            id = layer.id;
+            if(layer.featureCollection && layer.featureCollection.layers.length){
+              id = layer.featureCollection.layers[0].id;
+            }
+            return true;  
+          }else{
+            return false;
+          }
+        });
+        //get the layer from the map using the id and set it as the swipe layer. 
+        //if(id){
+
+          //.destroy() lukker widgeten
+          //swipeWidget.destroy();
+
+
+          //Home button pan'er til lagret oppstartposisjon for WebMapet. 
+          var home = new HomeButton({
+            map: map
+          }, "HomeButton");
+          home.startup();
+
+        //}
+      });
+
+    });
+  </script>
+
+</head>
+<body class="calcite">
+  <div id="map" class="map">
+    <div id="swipeDiv"></div>
+    <div id="HomeButton"></div>
+    <div id="SwipeButton" class="inActive"></div>
+
+    <div class="btn-group dropup">
+      <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Velg fotoår
+      </button>
+      <div class="dropdown-menu scrollable-menu" role="menu">
+        <div>hallo</div>
+        <div class="divider"></div>
+        <div>hei</div>
+        <div class="divider"></div>
+        <div>hei</div>
+        <div class="divider"></div>
+        <div>hallo</div>
+        <div class="divider"></div>
+        <div>hei</div>
+        <div class="divider"></div>
+        <div>hei</div>
+        <div class="divider"></div>
+        <div>hei</div>
+        <div class="divider"></div>
+        <div>hei</div>
+        <div class="divider"></div>
+        <div>hallo</div>
+        <div class="divider"></div>
+        <div>hei</div>
+        <div class="divider"></div>
+        <div>hei</div>
+      </div>
+    </div>
+  </div>
+
+    
+
+</body>
+</html>
