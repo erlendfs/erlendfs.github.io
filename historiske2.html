@@ -32,7 +32,7 @@
       top: 142px;
       left: 15px;
       z-index: 50;
-      background-image: url(./img/swipebutton4.jpg);
+      background-image: url(https://raw.githubusercontent.com/erlendfs/erlendfs.github.io/master/Img/swipebutton4.jpg);
     }
     .btn-group {
       position: absolute;
@@ -126,7 +126,22 @@
         });
 
         
+        function velgaar() {
+          console.log("kjører 'velgaar'");
+          if ($("#SwipeButton").attr("class") ==="inActive") {
+            for (i = 0; i < lagene.length; i++) {
+              if (lagene[i]!="GeocacheBilder_9229") {
+                if (lagene[i].visible) {
+                  lagene[i].hide()
+                }
+              }
+            }
+          }
+        };
 
+        var verdi1 = $("#nr1").attr("value");
+        console.log(verdi1);
+        //$("#nr1").click(velgaar());
 
 
         array.some(layers, function(layer){
@@ -172,9 +187,9 @@
         Velg fotoår
       </button>
       <ul class="dropdown-menu scrollable-menu" role="menu">
-        <li>hallo</li>
+        <li id="nr1" value=1991>den første</li>
         <li class="divider"></li>
-        <li>hei</li>
+        <li id="nr2" value=2001>den andre</li>
         <li class="divider"></li>
         <li>hallo</li>
         <li class="divider"></li>
