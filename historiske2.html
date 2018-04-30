@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
-  <title>Layer Swipe</title>
+  <title>Historiske ortofoto</title>
   <link rel="stylesheet" href="https://js.arcgis.com/3.24/esri/themes/calcite/dijit/calcite.css">
   <link rel="stylesheet" href="https://js.arcgis.com/3.24/esri/themes/calcite/esri/esri.css">
   <script
@@ -138,14 +138,8 @@
           console.log("Har startet..")
         };
         
-        //createSwipe(swipeLayer);
 
-        console.log("SjekkHer");
-        console.log("Layers: "+layers[0].id);
-        console.log("Lagene: "+lagene[1]);
-        //map.getLayer(layers[0].title).hide();
-        //map.getLayer(lagene[1]).hide();
-        //map.getLayer(lagene[2]).hide();
+        //Skjuler "Slettefjerne"-knappen når den ikke skal brukes. 
         $("#slettknapp").hide();
         $("#aarsdiv").hide();
 
@@ -176,9 +170,6 @@
 
      
         function velgAar(nyttAar) {
-          
-          //console.log("kjører 'velgaar'");
-          //console.log(nyttAar);
           if ($("#SwipeButton").attr("class") ==="Active") {
             //console.log("active")
             for (i = 0; i < layers.length; i++) {
@@ -190,7 +181,6 @@
               if (layers[i].title == nyttAar) {
                 createSwipe(layers[i].id);
                 console.log("Swipe-lag har blitt endret");
-                //console.log("Widget har blitt enablet. ")
                 forrigeAar = map.getLayer(layers[i].id);
                 $("#aarsspan").text((layers[i].title).slice(-4));
                 $("#aarsdiv").show();
@@ -215,7 +205,7 @@
           }
         };
 
-        
+        //On-click eventer som aktiverer det aktuelle laget. 
         $("#nr1").on("click", function() {velgAar($("#nr1").attr("value"))});
         $("#nr2").on("click", function() {velgAar($("#nr2").attr("value"))});
         $("#nr3").on("click", function() {velgAar($("#nr3").attr("value"))});
@@ -235,6 +225,8 @@
         $("#nr17").on("click", function() {velgAar($("#nr17").attr("value"))});
         $("#nr18").on("click", function() {velgAar($("#nr18").attr("value"))});
 
+
+        //fjerner det synlige laget når "Fjerne"-knappen trykkes på. 
         $("#slettknapp").on('click', function () {
           for (i = 0; i < layers.length; i++) {
             if (map.getLayer(layers[i].id).visible) {
@@ -245,7 +237,7 @@
           $("#aarsdiv").hide();
         });
 
-          //Home button pan'er til lagret oppstartposisjon for WebMapet. 
+          //Home knappen pan-er til lagret oppstartposisjon for WebMap 
         var home = new HomeButton({
           map: map
         }, "HomeButton");
