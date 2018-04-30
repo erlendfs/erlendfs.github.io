@@ -34,6 +34,24 @@
       z-index: 50;
       background-image: url(https://raw.githubusercontent.com/erlendfs/erlendfs.github.io/master/Img/swipebutton4.jpg);
     }
+    #slettknapp {
+      position: absolute;
+      height: 32px;
+      width: 70px;
+      bottom: 15px;
+      left: 123px;
+      z-index: 50;
+    }
+    #aarscont {
+      position: absolute;
+      height: 32px;
+      width: 70px;
+      bottom: 15px;
+      right: 15px;
+      z-index: 50;
+      background-color: #dddddd;
+      border-radius: 5px; 
+    }
     .btn-group {
       position: absolute;
       height: 40px;
@@ -57,6 +75,7 @@
   </style>
   <script src="https://js.arcgis.com/3.24/"></script>
   <script>
+
 
     require([
       "esri/map", 
@@ -84,18 +103,19 @@
         
         var lagene = map.layerIds;
         console.log(lagene);
-       // console.log(lagene[1]);
-        map.getLayer(lagene[1]).hide();
-        map.getLayer(lagene[2]).hide();
+        // console.log(lagene[1]);
+        for (i = 0; i < layers.length; i++) {
+          map.getLayer(layers[i].id).hide();
+        };
         //map.getLayer(lagene[3]).hide();
-        var swipeLayer = map.getLayer(lagene[1]);
-        console.log("swipeLayer: " + lagene[1]);
+        forrigeAar = map.getLayer(layers[0].id);
+        console.log("swipeLayer: " + layers[0].id);
 
-        swipeLayer.show();
+        //swipeLayer.show();
         swipeWidget = new LayerSwipe({
           type: "vertical",  //Try switching to "scope" or "horizontal"
           map: map,
-          layers: [swipeLayer]
+          layers: [forrigeAar]
         }, "swipeDiv");
         //console.log(swipeWidget);
         swipeWidget.startup();
@@ -109,7 +129,7 @@
           swipeAarLag.show();
           swipeWidget.layers=[swipeAarLag];
           console.log("Starter..")
-          swipeWidget.startup();
+          //swipeWidget.startup();
 
           console.log("Har startet..")
         };
@@ -117,26 +137,32 @@
         //createSwipe(swipeLayer);
 
         console.log("SjekkHer");
-        console.log(layers[0]);
-        console.log(lagene[1]);
+        console.log("Layers: "+layers[0].id);
+        console.log("Lagene: "+lagene[1]);
         //map.getLayer(layers[0].title).hide();
         //map.getLayer(lagene[1]).hide();
         //map.getLayer(lagene[2]).hide();
-
+        $("#slettknapp").hide();
 
         $("#SwipeButton").on("click", function() {
           if ($("#SwipeButton").attr("class") ==="inActive") {
             $("#SwipeButton").attr('class', 'Active')    
             /*Her kan du skrive koden for å aktivere Swiping med et bestemt lag*/ 
-            map.getLayer(lagene[1]).show();
+            map.getLayer(forrigeAar.id).hide();
+            createSwipe(forrigeAar.id);
+            console.log("Laget som blir aktivert: "+lagene[1]);
+            console.log(map.getLayer(forrigeAar.id));
             swipeWidget.enable();
+            $("#slettknapp").hide();
+            
           }
 
           else if ($("#SwipeButton").attr("class") ==="Active") {
             $("#SwipeButton").attr('class', 'inActive')
             /*Her kan du skrive kode for å skru av Swipe-funksjonaliteten*/
             swipeWidget.disable();
-            map.getLayer(lagene[1]).hide();
+            $("#slettknapp").show();
+            //map.getLayer(forrigeAar.id).hide();
           }
           console.log($("#SwipeButton").attr('class'));
         });
@@ -145,48 +171,99 @@
      
         function velgAar(nyttAar) {
           
-          console.log("kjører 'velgaar'");
-          console.log(nyttAar);
+          //console.log("kjører 'velgaar'");
+          //console.log(nyttAar);
           if ($("#SwipeButton").attr("class") ==="Active") {
-            console.log("active")
+            //console.log("active")
             for (i = 0; i < layers.length; i++) {
-              console.log("iterasjon "+i);
+              //console.log("iterasjon "+i);
               if (map.getLayer(layers[i].id).visible) {
                 //Dersom laget er synlig, skru det av. 
-                console.log("Ikke bakgrunsskart og Visible")
                 map.getLayer(layers[i].id).hide();
               }
               if (layers[i].title == nyttAar) {
-                console.log("Ødelegg SwipeWidget");
                 createSwipe(layers[i].id);
-                console.log("Widget har blitt laget");
-                swipeWidget.enable();
-                console.log("Widget har blitt enablet. ")
+                console.log("Swipe-lag har blitt endret");
+                //console.log("Widget har blitt enablet. ")
+                forrigeAar = map.getLayer(layers[i].id);
               }
             }
           }
-          else {
-            console.log("Ikkenoe")
+          else if ($("#SwipeButton").attr("class") ==="inActive") {
+              for (i = 0; i < layers.length; i++) {
+                //console.log("iterasjon "+i);
+                if (map.getLayer(layers[i].id).visible) {
+                  //Dersom laget er synlig, skru det av. 
+                  map.getLayer(layers[i].id).hide();
+                }
+                if (layers[i].title == nyttAar) {
+                  map.getLayer(layers[i].id).show();
+                  forrigeAar = map.getLayer(layers[i].id);
+                }
+              };
+              $("#slettknapp").show();
           }
         };
 
-        var verdi1 = $("#nr1").attr("value");
-        console.log(verdi1);
-        $("#nr1").on("click", function() {
-          velgAar(verdi1);
-        });
-        $("#nr2").on("click", function() {
-          velgAar();
-        });
+        
 
+        
+        
+        var verdi1 = $("#nr1").attr("value");
+        var verdi2 = $("#nr2").attr("value");
+        var verdi3 = $("#nr3").attr("value");
+        var verdi4 = $("#nr4").attr("value");
+        var verdi5 = $("#nr5").attr("value");
+        var verdi6 = $("#nr6").attr("value");
+        var verdi7 = $("#nr7").attr("value");
+        var verdi8 = $("#nr8").attr("value");
+        var verdi9 = $("#nr9").attr("value");
+        var verdi10 = $("#nr10").attr("value");
+        var verdi11 = $("#nr11").attr("value");
+        var verdi12 = $("#nr12").attr("value");
+        var verdi13 = $("#nr13").attr("value");
+        var verdi14 = $("#nr14").attr("value");
+        var verdi15 = $("#nr15").attr("value");
+        var verdi16 = $("#nr16").attr("value");
+        var verdi17 = $("#nr17").attr("value");
+        var verdi18 = $("#nr18").attr("value");
+
+        $("#nr1").on("click", function() {velgAar(verdi1)});
+        $("#nr2").on("click", function() {velgAar(verdi2)});
+        $("#nr3").on("click", function() {velgAar(verdi3)});
+        $("#nr4").on("click", function() {velgAar(verdi4)});
+        $("#nr5").on("click", function() {velgAar(verdi5)});
+        $("#nr6").on("click", function() {velgAar(verdi6)});
+        $("#nr7").on("click", function() {velgAar(verdi7)});
+        $("#nr8").on("click", function() {velgAar(verdi8)});
+        $("#nr9").on("click", function() {velgAar(verdi9)});
+        $("#nr10").on("click", function() {velgAar(verdi10)});
+        $("#nr11").on("click", function() {velgAar(verdi11)});
+        $("#nr12").on("click", function() {velgAar(verdi12)});
+        $("#nr13").on("click", function() {velgAar(verdi13)});
+        $("#nr14").on("click", function() {velgAar(verdi14)});
+        $("#nr15").on("click", function() {velgAar(verdi15)});
+        $("#nr16").on("click", function() {velgAar(verdi16)});
+        $("#nr17").on("click", function() {velgAar(verdi17)});
+        $("#nr18").on("click", function() {velgAar(verdi18)});
+
+        $("#slettknapp").on('click', function () {
+          for (i = 0; i < layers.length; i++) {
+            if (map.getLayer(layers[i].id).visible) {
+              map.getLayer(layers[i].id).hide()
+            }
+          };
+          $("#slettknapp").hide();
+        });
 
           //Home button pan'er til lagret oppstartposisjon for WebMapet. 
-          var home = new HomeButton({
-            map: map
-          }, "HomeButton");
-          home.startup();
+        var home = new HomeButton({
+          map: map
+        }, "HomeButton");
+        home.startup();
 
-        //}
+        $(".esriControlsBR").hide();
+        $(".esriAttributionLastItem").hide();
       });
 
     });
@@ -203,24 +280,50 @@
       <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Velg fotoår
       </button>
-      <ul class="dropdown-menu scrollable-menu" role="menu">
-        <li id="nr1" value="Hist1991">den første</li>
+      <ul id="katter" class="dropdown-menu scrollable-menu" role="menu">
+        <li id="nr1" value="Hist2010">2010</li>
         <li class="divider"></li>
-        <li id="nr2" value=2001>den andre</li>
+        <li id="nr2" value="Hist2007">2007</li>
         <li class="divider"></li>
-        <li>hallo</li>
+        <li id="nr3" value="Hist2003">2003</li>
         <li class="divider"></li>
-        <li>hei</li>
+        <li id="nr4" value="Hist1991">1991</li>
         <li class="divider"></li>
-        <li>hallo</li>
+        <li id="nr5" value="Hist1988">1988</li>
         <li class="divider"></li>
-        <li>hei</li>
+        <li id="nr6" value="Hist1987">1987</li>
         <li class="divider"></li>
-        <li>hallo</li>
+        <li id="nr7" value="Hist1978">1978</li>
         <li class="divider"></li>
-        <li>hei</li>
+        <li id="nr8" value="Hist1975">1975</li>
+        <li class="divider"></li>
+        <li id="nr9" value="Hist1966">1966</li>
+        <li class="divider"></li>
+        <li id="nr10" value="Hist1963">1963</li>
+        <li class="divider"></li>
+        <li id="nr11" value="Hist1962">1962</li>
+        <li class="divider"></li>
+        <li id="nr12" value="Hist1957">1957</li>
+        <li class="divider"></li>
+        <li id="nr13" value="Hist1955">1955</li>
+        <li class="divider"></li>
+        <li id="nr14" value="Hist1952">1952</li>
+        <li class="divider"></li>
+        <li id="nr15" value="Hist1948">1948</li>
+        <li class="divider"></li>
+        <li id="nr16" value="Hist1947">1947</li>
+        <li class="divider"></li>
+        <li id="nr17" value="Hist1939">1939</li>
+        <li class="divider"></li>
+        <li id="nr18" value="Hist1938">1938</li>
         <li class="divider"></li>
       </ul>
+    </div>
+    <button id="slettknapp" type="button" class="btn btn-default btn-sm">
+      <span class="glyphicon glyphicon-trash"></span> Fjern 
+    </button>
+    <div id="aarscont">
+      <span>19xx</span>
     </div>
   </div>
 
