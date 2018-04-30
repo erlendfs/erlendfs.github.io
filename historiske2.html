@@ -159,6 +159,7 @@
             console.log(map.getLayer(forrigeAar.id));
             swipeWidget.enable();
             $("#slettknapp").hide();
+            $("#aarsdiv").show();
             
           }
 
@@ -215,46 +216,24 @@
         };
 
         
-
-        
-        
-        var verdi1 = $("#nr1").attr("value");
-        var verdi2 = $("#nr2").attr("value");
-        var verdi3 = $("#nr3").attr("value");
-        var verdi4 = $("#nr4").attr("value");
-        var verdi5 = $("#nr5").attr("value");
-        var verdi6 = $("#nr6").attr("value");
-        var verdi7 = $("#nr7").attr("value");
-        var verdi8 = $("#nr8").attr("value");
-        var verdi9 = $("#nr9").attr("value");
-        var verdi10 = $("#nr10").attr("value");
-        var verdi11 = $("#nr11").attr("value");
-        var verdi12 = $("#nr12").attr("value");
-        var verdi13 = $("#nr13").attr("value");
-        var verdi14 = $("#nr14").attr("value");
-        var verdi15 = $("#nr15").attr("value");
-        var verdi16 = $("#nr16").attr("value");
-        var verdi17 = $("#nr17").attr("value");
-        var verdi18 = $("#nr18").attr("value");
-
-        $("#nr1").on("click", function() {velgAar(verdi1)});
-        $("#nr2").on("click", function() {velgAar(verdi2)});
-        $("#nr3").on("click", function() {velgAar(verdi3)});
-        $("#nr4").on("click", function() {velgAar(verdi4)});
-        $("#nr5").on("click", function() {velgAar(verdi5)});
-        $("#nr6").on("click", function() {velgAar(verdi6)});
-        $("#nr7").on("click", function() {velgAar(verdi7)});
-        $("#nr8").on("click", function() {velgAar(verdi8)});
-        $("#nr9").on("click", function() {velgAar(verdi9)});
-        $("#nr10").on("click", function() {velgAar(verdi10)});
-        $("#nr11").on("click", function() {velgAar(verdi11)});
-        $("#nr12").on("click", function() {velgAar(verdi12)});
-        $("#nr13").on("click", function() {velgAar(verdi13)});
-        $("#nr14").on("click", function() {velgAar(verdi14)});
-        $("#nr15").on("click", function() {velgAar(verdi15)});
-        $("#nr16").on("click", function() {velgAar(verdi16)});
-        $("#nr17").on("click", function() {velgAar(verdi17)});
-        $("#nr18").on("click", function() {velgAar(verdi18)});
+        $("#nr1").on("click", function() {velgAar($("#nr1").attr("value"))});
+        $("#nr2").on("click", function() {velgAar($("#nr2").attr("value"))});
+        $("#nr3").on("click", function() {velgAar($("#nr3").attr("value"))});
+        $("#nr4").on("click", function() {velgAar($("#nr4").attr("value"))});
+        $("#nr5").on("click", function() {velgAar($("#nr5").attr("value"))});
+        $("#nr6").on("click", function() {velgAar($("#nr6").attr("value"))});
+        $("#nr7").on("click", function() {velgAar($("#nr7").attr("value"))});
+        $("#nr8").on("click", function() {velgAar($("#nr8").attr("value"))});
+        $("#nr9").on("click", function() {velgAar($("#nr9").attr("value"))});
+        $("#nr10").on("click", function() {velgAar($("#nr10").attr("value"))});
+        $("#nr11").on("click", function() {velgAar($("#nr11").attr("value"))});
+        $("#nr12").on("click", function() {velgAar($("#nr12").attr("value"))});
+        $("#nr13").on("click", function() {velgAar($("#nr13").attr("value"))});
+        $("#nr14").on("click", function() {velgAar($("#nr14").attr("value"))});
+        $("#nr15").on("click", function() {velgAar($("#nr15").attr("value"))});
+        $("#nr16").on("click", function() {velgAar($("#nr16").attr("value"))});
+        $("#nr17").on("click", function() {velgAar($("#nr17").attr("value"))});
+        $("#nr18").on("click", function() {velgAar($("#nr18").attr("value"))});
 
         $("#slettknapp").on('click', function () {
           for (i = 0; i < layers.length; i++) {
