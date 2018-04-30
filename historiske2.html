@@ -42,16 +42,20 @@
       left: 123px;
       z-index: 50;
     }
-    #aarscont {
+    #aarsdiv {
       position: absolute;
-      height: 32px;
-      width: 70px;
       bottom: 15px;
+      width: 65px; 
       right: 15px;
+      height: 34px;
       z-index: 50;
       background-color: #dddddd;
-      border-radius: 5px; 
+      border-radius: 5px;
+      text-align: center;
+      vertical-align: middle;
+      line-height: 34px;
     }
+
     .btn-group {
       position: absolute;
       height: 40px;
@@ -143,6 +147,7 @@
         //map.getLayer(lagene[1]).hide();
         //map.getLayer(lagene[2]).hide();
         $("#slettknapp").hide();
+        $("#aarsdiv").hide();
 
         $("#SwipeButton").on("click", function() {
           if ($("#SwipeButton").attr("class") ==="inActive") {
@@ -186,6 +191,8 @@
                 console.log("Swipe-lag har blitt endret");
                 //console.log("Widget har blitt enablet. ")
                 forrigeAar = map.getLayer(layers[i].id);
+                $("#aarsspan").text((layers[i].title).slice(-4));
+                $("#aarsdiv").show();
               }
             }
           }
@@ -199,6 +206,8 @@
                 if (layers[i].title == nyttAar) {
                   map.getLayer(layers[i].id).show();
                   forrigeAar = map.getLayer(layers[i].id);
+                  $("#aarsspan").text((layers[i].title).slice(-4));
+                  $("#aarsdiv").show();
                 }
               };
               $("#slettknapp").show();
@@ -254,6 +263,7 @@
             }
           };
           $("#slettknapp").hide();
+          $("#aarsdiv").hide();
         });
 
           //Home button pan'er til lagret oppstartposisjon for WebMapet. 
@@ -319,11 +329,13 @@
         <li class="divider"></li>
       </ul>
     </div>
+
     <button id="slettknapp" type="button" class="btn btn-default btn-sm">
       <span class="glyphicon glyphicon-trash"></span> Fjern 
     </button>
-    <div id="aarscont">
-      <span>19xx</span>
+
+    <div id="aarsdiv">
+      <span id="aarsspan">19XX</span>
     </div>
   </div>
 
