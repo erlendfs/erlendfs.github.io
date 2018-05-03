@@ -25,6 +25,13 @@
       left: 15px;
       z-index: 50;
     }
+    #search {
+      display: block;
+      position: absolute;
+      z-index: 50;
+      top: 15px;
+      left: 62px;
+    }
     #SwipeButton {
       position: absolute;
       height: 32px;
@@ -32,7 +39,12 @@
       top: 142px;
       left: 15px;
       z-index: 50;
-      background-image: url(https://raw.githubusercontent.com/erlendfs/erlendfs.github.io/master/Img/swipebutton4.jpg);
+      background-image: url(https://raw.githubusercontent.com/erlendfs/erlendfs.github.io/master/Img/swipe_transparent2.png);
+      background-color: white;
+    }
+    #SwipeButton:hover {
+      cursor: pointer;
+      background-color: #e7f3fc;
     }
     #sarpkomm {
       position: absolute;
@@ -42,6 +54,9 @@
       right: 15px;
       z-index: 50;
       background-image: url(https://raw.githubusercontent.com/erlendfs/erlendfs.github.io/master/Img/sarpkomm_sm.png);
+    }
+    #sarpkomm:hover {
+      cursor: pointer;
     }
     #slettknapp {
       position: absolute;
@@ -87,6 +102,9 @@
       max-height: 200px;
       overflow-x: hidden;
     }
+    li:hover {
+      cursor:pointer;
+    }
 
   </style>
   <script src="https://js.arcgis.com/3.24/"></script>
@@ -100,27 +118,25 @@
       "esri/arcgis/utils",
       "dojo/_base/array",
       "esri/dijit/HomeButton",
+      "esri/dijit/Search",
       "dojo/domReady!"
     ], function(
-      Map, LayerSwipe, layer, arcgisUtils, array, HomeButton
+      Map, LayerSwipe, layer, arcgisUtils, array, HomeButton, Search
     )  {
 
       var mapDeferred = arcgisUtils.createMap("604b8670fb8c4ce6be5d2ab0e85eabb6", "map");
       mapDeferred.then(function(response){
 
-        var id;
         var map = response.map;
-        var title = "";
         
         //Lager en Array av objekter av hvert kartlag. 
         var layers = response.itemInfo.itemData.operationalLayers;
         console.log(layers);
 
-        // console.log(lagene[1]);
         for (i = 0; i < layers.length; i++) {
           map.getLayer(layers[i].id).hide();
         };
-        //map.getLayer(lagene[3]).hide();
+
         forrigeAar = map.getLayer(layers[0].id);
         console.log("swipeLayer: " + layers[0].id);
 
@@ -275,6 +291,12 @@
         }, "HomeButton");
         home.startup();
 
+        var search = new Search({
+            map: map,
+            enableInfoWindow: false
+         }, "search");
+         search.startup();
+
         $(".esriControlsBR").hide();
         $(".esriAttributionLastItem").hide();
       });
@@ -287,7 +309,8 @@
   <div id="map" class="map">
     <div id="swipeDiv"></div>
     <div id="HomeButton"></div>
-    <div id="SwipeButton" class="inActive"></div>
+    <div id="search"></div>
+    <div id="SwipeButton" class="inActive" title="Swipe-verktøy"></div>
 
     <div class="btn-group dropup">
       <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
