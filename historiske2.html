@@ -34,6 +34,15 @@
       z-index: 50;
       background-image: url(https://raw.githubusercontent.com/erlendfs/erlendfs.github.io/master/Img/swipebutton4.jpg);
     }
+    #sarpkomm {
+      position: absolute;
+      height: 63px;
+      width: 50px;
+      top: 15px;
+      right: 15px;
+      z-index: 50;
+      background-image: url(https://raw.githubusercontent.com/erlendfs/erlendfs.github.io/master/Img/sarpkomm_sm.png);
+    }
     #slettknapp {
       position: absolute;
       height: 32px;
@@ -103,13 +112,10 @@
         var map = response.map;
         var title = "";
         
-        //loop through all the operational layers in the web map 
-        //to find the one with the specified title;
+        //Lager en Array av objekter av hvert kartlag. 
         var layers = response.itemInfo.itemData.operationalLayers;
         console.log(layers);
-        
-        var lagene = map.layerIds;
-        console.log(lagene);
+
         // console.log(lagene[1]);
         for (i = 0; i < layers.length; i++) {
           map.getLayer(layers[i].id).hide();
@@ -152,8 +158,8 @@
             /*Her kan du skrive koden for å aktivere Swiping med et bestemt lag*/ 
             map.getLayer(forrigeAar.id).hide();
             createSwipe(forrigeAar.id);
-            console.log("Laget som blir aktivert: "+lagene[1]);
-            console.log(map.getLayer(forrigeAar.id));
+            //console.log("Laget som blir aktivert: "+lagene[1]);
+            //console.log(map.getLayer(forrigeAar.id));
             swipeWidget.enable();
             $("#slettknapp").hide();
             $("#aarsdiv").show();
@@ -173,6 +179,7 @@
 
      
         function velgAar(nyttAar) {
+          //console.log("Starter velgar");
           if ($("#SwipeButton").attr("class") ==="Active") {
             //console.log("active")
             for (i = 0; i < layers.length; i++) {
@@ -192,12 +199,13 @@
           }
           else if ($("#SwipeButton").attr("class") ==="inActive") {
               for (i = 0; i < layers.length; i++) {
-                //console.log("iterasjon "+i);
                 if (map.getLayer(layers[i].id).visible) {
                   //Dersom laget er synlig, skru det av. 
                   map.getLayer(layers[i].id).hide();
                 }
+                //console.log(layers[i].id);
                 if (layers[i].title == nyttAar) {
+                  //console.log("Skru på lag "+layers[i].id);
                   map.getLayer(layers[i].id).show();
                   forrigeAar = map.getLayer(layers[i].id);
                   $("#aarsspan").text((layers[i].title).slice(-4));
@@ -208,6 +216,27 @@
           }
         };
 
+
+
+
+        
+        var x=1;
+        for (i = 0; i < layers.length; i++) {
+          var tittel = layers[i].title;
+          //console.log(tittel);
+          $("#ulScroll").append($("<li>").text(String(tittel.slice(-4))).attr("id", "nr"+x).attr("value", tittel));
+          $("#nr"+String(x)).append($("<div>").attr("class", "divider"));
+          //$("#nr"+String(x)).on("click", function(tittel2) {console.log(tittel2)});
+          
+          x++;
+          
+          //console.log("Divider added..");
+        };
+        
+        
+
+        
+        
         //On-click eventer som aktiverer det aktuelle laget. 
         $("#nr1").on("click", function() {velgAar($("#nr1").attr("value"))});
         $("#nr2").on("click", function() {velgAar($("#nr2").attr("value"))});
@@ -227,7 +256,7 @@
         $("#nr16").on("click", function() {velgAar($("#nr16").attr("value"))});
         $("#nr17").on("click", function() {velgAar($("#nr17").attr("value"))});
         $("#nr18").on("click", function() {velgAar($("#nr18").attr("value"))});
-
+        
 
         //fjerner det synlige laget når "Fjerne"-knappen trykkes på. 
         $("#slettknapp").on('click', function () {
@@ -264,43 +293,8 @@
       <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Velg fotoår
       </button>
-      <ul id="katter" class="dropdown-menu scrollable-menu" role="menu">
-        <li id="nr1" value="Hist2010">2010</li>
-        <li class="divider"></li>
-        <li id="nr2" value="Hist2007">2007</li>
-        <li class="divider"></li>
-        <li id="nr3" value="Hist2003">2003</li>
-        <li class="divider"></li>
-        <li id="nr4" value="Hist1991">1991</li>
-        <li class="divider"></li>
-        <li id="nr5" value="Hist1988">1988</li>
-        <li class="divider"></li>
-        <li id="nr6" value="Hist1987">1987</li>
-        <li class="divider"></li>
-        <li id="nr7" value="Hist1978">1978</li>
-        <li class="divider"></li>
-        <li id="nr8" value="Hist1975">1975</li>
-        <li class="divider"></li>
-        <li id="nr9" value="Hist1966">1966</li>
-        <li class="divider"></li>
-        <li id="nr10" value="Hist1963">1963</li>
-        <li class="divider"></li>
-        <li id="nr11" value="Hist1962">1962</li>
-        <li class="divider"></li>
-        <li id="nr12" value="Hist1957">1957</li>
-        <li class="divider"></li>
-        <li id="nr13" value="Hist1955">1955</li>
-        <li class="divider"></li>
-        <li id="nr14" value="Hist1952">1952</li>
-        <li class="divider"></li>
-        <li id="nr15" value="Hist1948">1948</li>
-        <li class="divider"></li>
-        <li id="nr16" value="Hist1947">1947</li>
-        <li class="divider"></li>
-        <li id="nr17" value="Hist1939">1939</li>
-        <li class="divider"></li>
-        <li id="nr18" value="Hist1938">1938</li>
-        <li class="divider"></li>
+
+      <ul id="ulScroll" class="dropdown-menu scrollable-menu" role="menu">
       </ul>
     </div>
 
@@ -309,8 +303,9 @@
     </button>
 
     <div id="aarsdiv">
-      <span id="aarsspan">19XX</span>
+      <span id="aarsspan">1938</span>
     </div>
+    <div id="sarpkomm" onclick="location.href='https://www.sarpsborg.com';"></div>
   </div>
 
     
