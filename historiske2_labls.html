@@ -1,0 +1,344 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
+  <title>Historiske ortofoto</title>
+  <link rel="stylesheet" href="https://js.arcgis.com/3.24/esri/themes/calcite/dijit/calcite.css">
+  <link rel="stylesheet" href="https://js.arcgis.com/3.24/esri/themes/calcite/esri/esri.css">
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+  integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+  crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <style>
+    html, body, #map {
+      padding:0;
+      margin:0;
+      height:100%;
+      position:relative;
+    }
+    #HomeButton {
+      position: absolute;
+      top: 95px;
+      left: 15px;
+      z-index: 50;
+    }
+    #search {
+      display: block;
+      position: absolute;
+      z-index: 50;
+      top: 15px;
+      left: 62px;
+    }
+    #SwipeButton {
+      position: absolute;
+      height: 32px;
+      width: 32px;
+      top: 142px;
+      left: 15px;
+      z-index: 50;
+      background-image: url(https://raw.githubusercontent.com/erlendfs/erlendfs.github.io/master/Img/swipe_transparent2.png);
+      background-color: white;
+    }
+    #SwipeButton:hover {
+      cursor: pointer;
+      background-color: #e7f3fc;
+    }
+    #sarpkomm {
+      position: absolute;
+      height: 63px;
+      width: 50px;
+      top: 15px;
+      right: 15px;
+      z-index: 50;
+      background-image: url(https://raw.githubusercontent.com/erlendfs/erlendfs.github.io/master/Img/sarpkomm_sm.png);
+    }
+    #sarpkomm:hover {
+      cursor: pointer;
+    }
+    #slettknapp {
+      position: absolute;
+      height: 32px;
+      width: 70px;
+      bottom: 16px;
+      left: 123px;
+      z-index: 50;
+    }
+    #aarsdiv {
+      position: absolute;
+      bottom: 15px;
+      width: 65px; 
+      right: 15px;
+      height: 34px;
+      z-index: 50;
+      background-color: #dddddd;
+      border: 1px solid black;
+      border-radius: 5px;
+      text-align: center;
+      vertical-align: middle;
+      line-height: 34px;
+    }
+
+    .btn-group {
+      position: absolute;
+      border: 1px solid black;
+      border-radius: 5px;
+      height: 40px;
+      bottom: 15px;
+      left: 15px;
+      height: auto;
+      z-index: 50;
+    }
+    .dropdown-menu {
+      width: 100%
+    }
+    .dropdown-menu li {
+      text-align: center;
+    }
+    .scrollable-menu {
+      height: auto;
+      max-height: 200px;
+      overflow-x: hidden;
+    }
+    li:hover {
+      cursor:pointer;
+    }
+
+  </style>
+  <script src="https://js.arcgis.com/3.24/"></script>
+  <script>
+
+
+    require([
+      "esri/map", 
+      "esri/dijit/LayerSwipe",
+      "esri/layers/layer",
+      "esri/arcgis/utils",
+      "dojo/_base/array",
+      "esri/dijit/HomeButton",
+      "esri/dijit/Search",
+      "dojo/domReady!"
+    ], function(
+      Map, LayerSwipe, layer, arcgisUtils, array, HomeButton, Search
+    )  {
+
+      var mapDeferred = arcgisUtils.createMap("604b8670fb8c4ce6be5d2ab0e85eabb6", "map");
+      mapDeferred.then(function(response){
+
+        var map = response.map;
+        
+        //Lager en Array av objekter av hvert kartlag. 
+        var layers = response.itemInfo.itemData.operationalLayers;
+        layers.reverse();
+        console.log(layers);
+
+
+        for (i = 1; i < layers.length; i++) {
+          map.getLayer(layers[i].id).hide();
+        };
+
+        forrigeAar = map.getLayer(layers[1].id);
+        console.log("swipeLayer: " + layers[1].id);
+
+        //swipeLayer.show();
+        swipeWidget = new LayerSwipe({
+          type: "vertical",  //Try switching to "scope" or "horizontal"
+          map: map,
+          layers: [forrigeAar]
+        }, "swipeDiv");
+        //console.log(swipeWidget);
+        swipeWidget.startup();
+        swipeWidget.disable();
+
+        
+        //Aktiverer det laget som skal brukes i sveipingen. 
+        function createSwipe(swipeAar) {
+          console.log(swipeAar);
+          var swipeAarLag = map.getLayer(swipeAar);
+          swipeAarLag.show();
+          swipeWidget.layers=[swipeAarLag];
+          console.log("Starter..")
+          //swipeWidget.startup();
+
+          console.log("Har startet..")
+        };
+        
+
+        //Skjuler "Slettefjerne"-knappen når den ikke skal brukes. 
+        $("#slettknapp").hide();
+        $("#aarsdiv").hide();
+
+        $("#SwipeButton").on("click", function() {
+          if ($("#SwipeButton").attr("class") ==="inActive") {
+            $("#SwipeButton").attr('class', 'Active')    
+            /*Her kan du skrive koden for å aktivere Swiping med et bestemt lag*/ 
+            map.getLayer(forrigeAar.id).hide();
+            createSwipe(forrigeAar.id);
+            //console.log("Laget som blir aktivert: "+lagene[1]);
+            //console.log(map.getLayer(forrigeAar.id));
+            swipeWidget.enable();
+            $("#slettknapp").hide();
+            $("#aarsdiv").show();
+            
+          }
+
+          else if ($("#SwipeButton").attr("class") ==="Active") {
+            $("#SwipeButton").attr('class', 'inActive')
+            /*Her kan du skrive kode for å skru av Swipe-funksjonaliteten*/
+            swipeWidget.disable();
+            $("#slettknapp").show();
+            //map.getLayer(forrigeAar.id).hide();
+          }
+          console.log($("#SwipeButton").attr('class'));
+        });
+
+
+     
+        function velgAar(nyttAar) {
+          //console.log("Starter velgar");
+          if ($("#SwipeButton").attr("class") ==="Active") {
+            //console.log("active")
+            for (i = 1; i < layers.length; i++) {
+              //console.log("iterasjon "+i);
+              if (map.getLayer(layers[i].id).visible) {
+                //Dersom laget er synlig, skru det av. 
+                map.getLayer(layers[i].id).hide();
+              }
+              if (layers[i].title == nyttAar) {
+                createSwipe(layers[i].id);
+                console.log("Swipe-lag har blitt endret");
+                forrigeAar = map.getLayer(layers[i].id);
+                $("#aarsspan").text((layers[i].title).slice(-4));
+                $("#aarsdiv").show();
+              }
+            }
+          }
+          else if ($("#SwipeButton").attr("class") ==="inActive") {
+              for (i = 1; i < layers.length; i++) {
+                //console.log(layers[i].title);
+                if (map.getLayer(layers[i].id).visible) {
+                  //Dersom laget er synlig, skru det av. 
+                  console.log(layers[i].id);
+                  map.getLayer(layers[i].id).hide();
+                }
+                //console.log(layers[i].id);
+                if (layers[i].title == nyttAar) {
+                  //console.log("Skru på lag "+layers[i].id);
+                  map.getLayer(layers[i].id).show();
+
+                  forrigeAar = map.getLayer(layers[i].id);
+                  $("#aarsspan").text((layers[i].title).slice(-4));
+                  $("#aarsdiv").show();
+                }
+              };
+              $("#slettknapp").show();
+          }
+        };
+
+
+
+
+        
+        var x=1;
+        for (i = 1; i < layers.length; i++) {
+          var tittel = layers[i].title;
+          //console.log(tittel);
+          $("#ulScroll").append($("<li>").text(String(tittel.slice(-4))).attr("id", "nr"+x).attr("value", tittel));
+          $("#nr"+String(x)).append($("<div>").attr("class", "divider"));
+          //$("#nr"+String(x)).on("click", function(tittel2) {console.log(tittel2)});
+          
+          x++;
+          
+          //console.log("Divider added..");
+        };
+        
+        
+
+        
+        
+        //On-click eventer som aktiverer det aktuelle laget. 
+        $("#nr1").on("click", function() {velgAar($("#nr1").attr("value"))});
+        $("#nr2").on("click", function() {velgAar($("#nr2").attr("value"))});
+        $("#nr3").on("click", function() {velgAar($("#nr3").attr("value"))});
+        $("#nr4").on("click", function() {velgAar($("#nr4").attr("value"))});
+        $("#nr5").on("click", function() {velgAar($("#nr5").attr("value"))});
+        $("#nr6").on("click", function() {velgAar($("#nr6").attr("value"))});
+        $("#nr7").on("click", function() {velgAar($("#nr7").attr("value"))});
+        $("#nr8").on("click", function() {velgAar($("#nr8").attr("value"))});
+        $("#nr9").on("click", function() {velgAar($("#nr9").attr("value"))});
+        $("#nr10").on("click", function() {velgAar($("#nr10").attr("value"))});
+        $("#nr11").on("click", function() {velgAar($("#nr11").attr("value"))});
+        $("#nr12").on("click", function() {velgAar($("#nr12").attr("value"))});
+        $("#nr13").on("click", function() {velgAar($("#nr13").attr("value"))});
+        $("#nr14").on("click", function() {velgAar($("#nr14").attr("value"))});
+        $("#nr15").on("click", function() {velgAar($("#nr15").attr("value"))});
+        $("#nr16").on("click", function() {velgAar($("#nr16").attr("value"))});
+        $("#nr17").on("click", function() {velgAar($("#nr17").attr("value"))});
+        $("#nr18").on("click", function() {velgAar($("#nr18").attr("value"))});
+        
+
+        //fjerner det synlige laget når "Fjerne"-knappen trykkes på. 
+        $("#slettknapp").on('click', function () {
+          for (i = 1; i < layers.length; i++) {
+            if (map.getLayer(layers[i].id).visible) {
+              map.getLayer(layers[i].id).hide()
+            }
+          };
+          $("#slettknapp").hide();
+          $("#aarsdiv").hide();
+        });
+
+          //Home knappen pan-er til lagret oppstartposisjon for WebMap 
+        var home = new HomeButton({
+          map: map
+        }, "HomeButton");
+        home.startup();
+
+        var search = new Search({
+            map: map,
+            enableInfoWindow: false,
+            enableButtonMode: true,
+            expanded: false
+         }, "search");
+         search.startup();
+
+        $(".esriControlsBR").hide();
+        $(".esriAttributionLastItem").hide();
+      });
+
+    });
+  </script>
+
+</head>
+<body class="calcite">
+  <div id="map" class="map">
+    <div id="swipeDiv"></div>
+    <div id="HomeButton"></div>
+    <div id="search"></div>
+    <div id="SwipeButton" class="inActive" title="Swipe-verktøy"></div>
+
+    <div class="btn-group dropup">
+      <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Velg fotoår
+      </button>
+
+      <ul id="ulScroll" class="dropdown-menu scrollable-menu" role="menu">
+      </ul>
+    </div>
+
+    <button id="slettknapp" type="button" class="btn btn-default btn-sm">
+      <span class="glyphicon glyphicon-trash"></span> Fjern 
+    </button>
+
+    <div id="aarsdiv">
+      <span id="aarsspan">1938</span>
+    </div>
+    <div id="sarpkomm" onclick="location.href='https://www.sarpsborg.com';"></div>
+  </div>
+
+    
+
+</body>
+</html>
