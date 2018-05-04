@@ -139,8 +139,9 @@
           map.getLayer(layers[i].id).hide();
         };
 
-        forrigeAar = map.getLayer(layers[1].id);
-        console.log("swipeLayer: " + layers[1].id);
+        forrigeAar = map.getLayer(layers[18].id);
+        $("#aarsspan").text((layers[18].title).slice(-4));
+        console.log("swipeLayer: " + layers[18].id);
 
         //swipeLayer.show();
         swipeWidget = new LayerSwipe({
