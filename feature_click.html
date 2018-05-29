@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>360 view</title>
+
+	<style>
+	  html,
+	  body,
+	  	#viewDiv {
+	    	padding: 0;
+	    	margin: 0;
+	    	height: 100%;
+	    	width: 100%;
+	  	}
+	  	#info {
+	    	background-color: black;
+	    	opacity: 0.75;
+	    	color: orange;
+	    	font-size: 18pt;
+	    	padding: 8px;
+	    	visibility: hidden;
+	  	}
+
+			  	/* The Modal (background) */
+		.modal {
+		    display: none; /* Hidden by default */
+		    position: fixed; /* Stay in place */
+		    z-index: 1; /* Sit on top */
+		    left: 0;
+		    top: 0;
+		    width: 100%; /* Full width */
+		    height: 100%; /* Full height */
+		    margin: auto; 
+		    overflow: auto; /* Enable scroll if needed */
+		    background-color: rgb(0,0,0); /* Fallback color */
+		    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+		}
+
+		/* Modal Content */
+		.modal-content {
+		    background-color: #5e5e5e;
+		    margin: auto;
+		    border: 1px solid #888;
+		    width: 90%;
+		    height: 95%;
+		    margin-top: 2%; 
+		}
+
+		/* The Close Button */
+		.close {
+		    color: #f7f4f4;
+		    float: right;
+		    font-weight: bold;
+		}
+
+		.close:hover,
+		.close:focus {
+		    color: #000;
+		    text-decoration: none;
+		    cursor: pointer;
+		}
+		#lukk {
+			height: 5%;
+			width: 100%;
+			font-size: 4vh; 
+		}
+		#ifraClass {
+			height: 95%;
+			width: 100%;
+			display: block;
+		}
+		#popup360 {
+			display: block;
+			min-height: 100%;
+			width: 100%;
+			border: none;
+		}
+		#stedsnavn {
+			display: inline-block;
+			color: white;
+			font-family: sans-serif;
+		}
+	</style>
+
+	<link rel="stylesheet" href="https://js.arcgis.com/4.7/esri/css/main.css">
+	<script src="https://js.arcgis.com/4.7/"></script>
+
+	  <script>
+	    require([
+	      "esri/views/MapView",
+	      "esri/WebMap",
+	      "dojo/domReady!"
+	    ], function(
+	      MapView, WebMap
+	    ) {
+
+
+			// Get the modal
+			var modal = document.getElementById('myModal');
+
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close")[0];
+
+		    var webmap = new WebMap({
+		      portalItem: { // autocasts as new PortalItem()
+		        id: "1852253ee6d6488589dfa546e86e40d5"
+		      }
+		    });
+
+
+	      	/************************************************************
+	       	* Set the WebMap instance to the map property in a MapView.
+	       	************************************************************/
+	        var view = new MapView({
+	        	map: webmap,
+	        	container: "viewDiv"
+	      	});
+
+
+	      	view.on("click", function(event) {
+	    	  	view.hitTest(event)
+	    	  	.then(test1);
+	    	});
+	            
+	      	function test1(response) {
+	        	// the topmost graphic from the hurricanesLayer
+	        	// and display select attribute values from the
+	       		// graphic to the user
+				
+	        	if (response.results.length) {
+	        		
+	        		var navn = response.results[0].graphic.attributes.navn;
+	        		var url = response.results[0].graphic.attributes.url;
+	        		//Åpne Modal'en når en feature er blitt klikket
+					modal.style.display = "block";	        	
+					console.log(url + " og " + navn);
+					document.getElementById('stedsnavn').innerHTML="&nbsp;"+navn;
+					document.getElementById('popup360').src=url;
+					//view.popup.close();
+					console.log("Faderrullan");
+	        	}
+	        	
+
+	      	};
+
+
+		  	span.onclick = function() {
+		   		modal.style.display = "none";
+		   		view.popup.close();
+			};
+			// When the user clicks anywhere outside of the modal, close it
+			window.onclick = function(event) {
+			    if (event.target == modal) {
+			        modal.style.display = "none";
+			    }
+			    view.popup.close();
+			};
+	    });
+  </script>
+
+
+</head>
+<body>
+	  	<div id="viewDiv">
+
+	  	</div>
+
+	  	<div id="myModal" class="modal">
+
+			  	<!-- Modal content -->
+			<div class="modal-content">
+				<div id="lukk">
+					<span id="stedsnavn"></span>
+					<span class="close">&times;&nbsp;</span>
+				</div>
+			    
+			    <div id="ifraClass">
+			    	<iframe id="popup360" src=""></iframe>
+			    </div>
+			</div>
+
+		</div>
+
+</body>
+</html>
