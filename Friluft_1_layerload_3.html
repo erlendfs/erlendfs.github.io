@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>360 view</title>
+
+	<link rel="stylesheet" href="FriluftStyle_2.css">
+
+	<link rel="stylesheet" href="https://js.arcgis.com/4.7/esri/css/main.css">
+	<script src="https://js.arcgis.com/4.7/"></script>
+	<script
+		src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+		crossorigin="anonymous">
+	</script>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik">
+
+	  <script>
+	    require([
+	      "esri/views/MapView",
+	      "esri/WebMap",
+	      "esri/layers/FeatureLayer",
+	      "esri/geometry/Extent",
+	      "esri/symbols/SimpleLineSymbol",
+	      "esri/tasks/QueryTask",
+	      "esri/tasks/support/Query",
+	      "esri/Graphic",
+	      "esri/widgets/Locate",
+	      "dojo/domReady!"
+	    ], function(
+	      MapView, WebMap, FeatureLayer, Extent, SimpleLineSymbol, QueryTask, Query, Graphic, Locate
+	    ) {
+
+
+
+
+	    	function velgKategori (valgt) {
+	    		$(".KartVindu").addClass("KartVinduNorm");
+	    		$(".InfoVindu").addClass("InfoVinduNorm");
+
+	    		$(".kategorier").addClass("kategorierNorm");
+
+	    		$(".catdiv").addClass("catDivNorm");
+				
+
+				//skjul overskrift i #genInfo
+				$("#infoTittel").hide();
+				console.log("KAtter  " + valgt);
+
+				//Sett valgt kategori til active
+				$(".cat").attr("class", "cat catNorm");
+				$("#"+valgt).addClass("catActive");
+
+				$("#infoknapp").show();
+				
+
+				if (valgt==="badesteder") {
+					skruAvLag();
+					badestedPunkt.visible = true;
+					zoomToLayer(badestedPunkt);
+
+					$("#genCatTittel").html("Badesteder");
+					$("#genCatBes").html(badestederBeskrivelse);
+
+
+					//$("#genBadeInfo").show();
+				}
+				if (valgt==="turloyper") {
+					skruAvLag();
+					turloypeLinje.visible = true;
+					zoomToLayer(turloypeLinje);
+					//$("#genTurInfo").show();
+					$("#genCatTittel").html("Turløyper");
+					$("#genCatBes").html(turBeskrivelse);
+					
+				}
+				if (valgt==="idrett") {
+					
+				}
+
+			};
+
+	    	function zoomToLayer(layer) {
+	    		//console.log(layer);
+		        view.goTo(layer.fullExtent.clone().expand(2));
+		    };
+
+
+		    var prevExtent;
+
+		    function skruAvLag() {
+				for (var i = 0; i < opLag.length; i++) {
+					if (opLag[i].visible) {
+						opLag[i].visible=false
+					}
+				}
+
+		    };
+
+
+		    /************* LUKKER INFORMASJONSVINDU FOR BADING OG TURLØYPE *********/
+		    function lukkVindu(denne) {
+		    	if (denne ==="lukkTur") {
+		    		$("#"+denne).parent().parent().hide();
+		    	};
+				
+				$(".KartVinduHalf").attr('class', 'KartVindu KartVinduNorm');
+	        	$(".InfoVinduHalf").attr('class', 'InfoVindu InfoVinduNorm');
+
+	        	$(".KartVindu").attr('class', 'KartVindu KartVinduNorm');
+	        	$(".InfoVindu").attr('class', 'InfoVindu InfoVinduNorm');
+	        	$("#genInfo").show();
+
+	        	if ($('.modal360').is(':visible')) {
+	        		$('.modal360').hide();
+				};
+				//HVIS knaoppen som ble trykket har ID "lukkBad", fjern ikoner, fjern 360 kamera knappen, og fjern popup-vinduet.
+				if (denne ==="lukkBad") {
+					$(".grid-container div").remove();
+					$("#kamera").hide();
+					$(".modalBad").hide();
+					$(".badeInfo").hide();
+					
+				}
+	        	view.goTo(prevExtent);
+			};
+
+
+			// Get the modal
+			var modal360 = document.getElementById('myModal');
+
+
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close")[0];
+
+		    var webmap = new WebMap({
+		      portalItem: { // autocasts as new PortalItem()
+		        id: "1852253ee6d6488589dfa546e86e40d5"
+		      }
+		    });
+
+		    var badeRenderer = {
+		        type: "simple", // autocasts as new SimpleRenderer()
+		        // Define a default marker symbol with a small outline
+		        symbol: {
+		          type: "simple-marker", // autocasts as new SimpleMarkerSymbol()
+		          color: [244, 167, 66],
+		          outline: { // autocasts as new SimpleLineSymbol()
+		            color: [68, 86, 109],
+		            width: 1.4,
+		            opacity: 0
+		          }
+		        }
+		    };
+
+		    var turRenderer = {
+		    	type: "simple",
+
+		    	symbol: {
+		    		type:"simple-line",
+		    		color: [71, 137, 244],
+		    		width: "3.5px"
+		    	}
+		    };
+
+		    /***********Legg til badestedene *************/
+		    var badestedPunkt = new FeatureLayer({
+		        outFields: ["*"],
+		        portalItem: { // autocasts as new PortalItem()
+		          id: "efc3ecdc04b245ecb27c4fe55b2ebe6a"
+		        },
+		      	title: "Punktlaget",
+		      	renderer: badeRenderer
+		    });
+		    webmap.add(badestedPunkt);
+		    
+
+		    /***********Legg til turløypelaget *************/
+		    var turloypeLinje = new FeatureLayer({
+		        outFields: ["*"],
+		        portalItem: { // autocasts as new PortalItem()
+		          id: "c48f433a6d15419397f601839c980aa7"
+		        },
+		      	title: "Linjelaget",
+		      	renderer: turRenderer
+		    });
+		    webmap.add(turloypeLinje);
+
+
+		    //Skjul kartlagene ved oppstart
+		    badestedPunkt.visible = false;
+		    turloypeLinje.visible = false;
+
+
+
+		    // LEGG TIL DE LAGENE SOM SKAL VÆRE MED I KARTET I DENNE LISTEN. 	 
+		    var opLag = [badestedPunkt, turloypeLinje]; 
+
+	      	/************************************************************
+	       	* Set the WebMap instance to the map property in a MapView.
+	       	************************************************************/
+	        var view = new MapView({
+	        	map: webmap,
+	        	container: "viewDiv"
+	      	});
+
+
+	      	view.on("click", function(event) {
+	      		event.stopPropagation(); //Overwrite default click-for popup behaviour
+	    	  	view.hitTest(event)
+	    	  	.then(test1)
+	    	});
+
+	      	//Setter opp Locate-widgeten
+	      	var locateWidget = new Locate({
+			  view: view,   // Attaches the Locate button to the view
+			  graphic: new Graphic({
+			    symbol: { 
+			    	type: "simple-marker",
+			    	color: [51, 153, 255],
+			    	outline: { // autocasts as new SimpleLineSymbol()
+			            color: [255, 255, 255],
+			            width: 0.75,
+			            opacity: 0
+			        }
+			    }  // overwrites the default symbol used for the
+			    // graphic placed at the location of the user when found
+			  })
+			});
+
+
+	      	view.ui.add(locateWidget, "top-left");
+
+	            
+	      	function test1(response) {
+
+ 
+				/***************** HVIS PUNKT ER BADESTED **************/
+	        	if (response.results.length && response.results[0].graphic.attributes.kategori ==="badested") {
+	        		//hide Generell info meny
+					$("#genInfo").hide();
+					//Fjern ikonene som hørte til forrige punkt
+					$(".grid-container div").remove();
+
+					//Åpner bade-popup dersom bredden på skjermen tilsier  I mobil-format er bade-popupen stylet med 0% høyde og 0% bredde. 
+					if ($(document).width()>=1025) {
+						$(".modalBad").show();
+					};
+					
+
+					if ($(".KartVindu").hasClass('KartVinduNorm')) {
+	        			$(".KartVindu").removeClass('KartVinduNorm')
+	        		};
+	        		if ($(".InfoVindu").hasClass('InfoVinduNorm')) {
+	        			$(".InfoVindu").removeClass('InfoVinduNorm')
+	        		};
+
+	        		$(".KartVindu").addClass('KartVinduBad');
+
+	        		prevExtent=view.extent.clone().expand(1);
+					
+	        		let attributter = response.results[0].graphic.attributes;
+	        		var navn = attributter.navn;
+	        		let url = attributter.url;
+	        		let beskrivelse = attributter.beskrivelse;
+
+					//let badeplassExtent = response.results[0].graphic.geometry.extent;
+					let koordinater = response.results[0].graphic.geometry;
+
+					view.goTo({
+						target: koordinater,
+						zoom: 15});
+
+					console.log();
+	        		//Dersom punktet som har blitt klikket har en URL...Åpne Modal'en med 360 view. 
+	        		if (url) {
+	        			$("#kamera").show();       	
+						console.log(navn);
+						//Endre URL'en i InlineFramen ved ID 'popup360'.
+						document.getElementById('popup360').src=url;
+	        		};
+					
+	        		console.log(response.results[0].graphic);
+					$(".badeInfo").show();
+					$(".badeTittel").html(navn);
+					$(".badeBes p").html(beskrivelse);
+					//Hvis punktet har data om vannkvalitet....
+					if (attributter.kvalitet) {
+						//Vis badevannskvaliteten 
+						$(".badevannskvalitet").show();
+						$(".badevannskvalitet span").html(attributter.kvalitet);
+						//Sett fargen på teksten til vannkvalitet avhengig av verdi 
+						if (attributter.kvalitet==="God") {
+							//God kvalitet = Grønn tekst
+							$(".badevannskvalitet span").css("color", "green");
+						}
+						else if (attributter.kvalitet==="Mindre god") {
+							// Mindre god kvalitet = Oransje tekst
+							$(".badevannskvalitet span").css("color", "#ff8503");
+						}
+						else if (attributter.kvalitet==="Ikke akseptabel") {
+							// Dårlig vannkvalitet = Rød tekst
+							$(".badevannskvalitet span").css("color", "red");
+						}
+
+					} else { 
+						//Dersom punktet ikke inneholder noen data om vannkvalitet: Ikke vis bullet-point med vannkvalitet. 
+						$(".badevannskvalitet").hide();
+					};
+
+					if (attributter.temperatur) {
+						//Dersom punktet har dat aom temp, vis temperatur
+						$(".badetemp").show();
+						$(".badetemp span").html(attributter.temperatur+"&#x2103");
+
+					} else { 
+						//Dersom punktet ikke har data om badetemp, ikke vis bulletpoint
+						$(".badetemp").hide();
+					};
+
+
+					// Sjekk om punktet som er blitt klikket har ulike fasiliteter. 
+					// Hvis punktet ikke er "null" i cellen som sjekkes, så legg til ikonet med en IMG tag. 
+					if (attributter.toalett) {
+						$(".grid-container").append("<div class='grid-item' id='div-toalett' ><img src='dass_sm.png'></div>");
+					}
+					if (attributter.stupetarn) {
+						$(".grid-container").append("<div class='grid-item' id='div-stupe' ><img src='stupe_sm.png'></div>");
+					}
+					if (attributter.kiosk) {
+						$(".grid-container").append("<div class='grid-item' id='div-kiosk' ><img src='kiosk_sm.png'></div>");
+					}
+					if (attributter.volleyball) {
+						$(".grid-container").append("<div class='grid-item' id='div-volley' ><img src='volley_sm.png'></div>");
+					}
+					if (attributter.grill) {
+						$(".grid-container").append("<div class='grid-item' id='div-grill' ><img src='baal_sm.png'></div>");
+					}
+	        	};
+
+
+
+
+
+
+
+
+	        	/******************* HVIS PUNKT ER TURLØYPE ******************/
+	        	if (response.results.length && response.results[0].graphic.attributes.kategori ==="turloype") {
+	        		console.log("TURLØYPE");
+	        		if ($(".KartVindu").hasClass('KartVinduNorm')) {
+	        			$(".KartVindu").removeClass('KartVinduNorm')
+	        		};
+	        		if ($(".InfoVindu").hasClass('InfoVinduNorm')) {
+	        			$(".InfoVindu").removeClass('InfoVinduNorm')
+	        		};
+
+	        		//Legg til klassen 'KartVinduHalf' slik at kartvinduet får nye CSS regler og endres til å dekke halve skjermen. 
+	        		$(".KartVindu").addClass('KartVinduHalf');
+	        		$(".InfoVindu").addClass('InfoVinduHalf');
+	        		$("#genInfo").hide();
+	        		$("#genTurInfo").hide();
+
+					prevExtent=view.extent.clone().expand(1);
+
+	        		let attributter = response.results[0].graphic.attributes;
+	        		let navn = attributter.navn;
+	        		let turInfoTab = attributter.beskr;
+	        		let featureExtent = response.results[0].graphic.geometry.extent;
+
+
+	        		if (attributter.hoydeprof) {
+	        			let bildeURL = String(attributter.hoydeprof);
+	        			console.log(bildeURL);
+	        			$("#terrengIMG").attr("src", bildeURL);
+	        		};
+	        		
+
+	        		$("#turInfo").show();
+	        		$("#turTittel").html(navn);
+	        		$("#turInfoTab").html(turInfoTab);
+
+	        		view.goTo(featureExtent.clone().expand(1));
+
+	        	};
+
+	        	/******************* HVIS PUNKT ER IDRETT ******************/
+
+	        	if (response.results.length && response.results[0].graphic.attributes.kategori ==="idrett") {
+
+	        	};
+	      	};
+
+
+
+
+
+		  	$(".close").on("click", function() {
+		   		modal360.style.display = "none";
+			});
+
+
+			// When the user clicks anywhere outside of the modal, close it
+			window.onclick = function(event) {
+			    if (event.target == modal360) {
+			        modal360.style.display = "none";			        
+			    }
+			};
+
+
+			/************ Lytt til Kamera-knappen ***************/
+			$("#kamera").on("click", function() {modal360.style.display = "block"})
+
+			/************ Lukk infovindu for turdetaljer ********/
+			$("#lukkTur").on("click", function () {lukkVindu(this.id)});
+			$(".lukkBad").on("click", function () {lukkVindu($(this).attr("class"))});
+
+
+			$(".lukkKat").on("click", function () {$("#genInfoModal").hide()})
+			$(".lukkKatBad").on("click", function () {$("#genBadeModal").hide()})
+
+
+			var badestederBeskrivelse= "Her ser du en oversikt over de ulike badeplassene i Sarpsborg Kommune. Ved å klikke deg inn på de enkelte badeplassene i kartet vil du få opp informasjon om badeplassen, samt et 360-bilde. Du vil også få en oversikt over hvilke fasiliteter som tilbys på den aktuelle badeplassen.";
+			var turBeskrivelse = "Sarpsborg har mange fine turløyper rundt om i kommunen. I dette kartet vises et utvalgt av noen av de flotteste turene. Ved å klikke på turene vil du kunne få litt info om turen, samt en terrengprofil som viser terrengvariasjoner på turen.";
+
+			/*********** Åpne info-modal************/
+			$("#infoknapp").on("click", function () {
+				$(".gen-modal").show();
+				//$(".gen-modal").toggleClass("active");
+				let aktivKategori = $(".catActive").attr("id");
+
+			});
+
+
+			//Legger til on-click event listeners først når viewet er ferdig innlastet. 
+			view.when(function () {
+				$("#badesteder").on("click", function () {velgKategori(this.id)});
+				$("#turloyper").on("click", function () {velgKategori(this.id)});	
+			});
+
+			
+
+
+	    });
+  </script>
+
+
+</head>
+<body>
+
+	<div class="KartVindu">
+	  	<div id="viewDiv">
+	  		
+	  	</div>
+
+	  	<div id="genInfoModal" class="modal gen-modal">
+	  		<div class="gen-modalContent">
+		  		<span class="lukkKat">&times;</span>
+				<div id="genCatTittel"><h4>Badesteder</h4></div>
+				<div id="genCatBes"></div>
+			</div>
+	  	</div>
+
+	  	<div id="genBadeModal" class="modalBad">
+	  		<div class="modalBadContent">
+		  		<div class="badeHeader">
+					<div class="lukkBad">
+						<span  class="lukkKat lukkX">&times;</span>
+					</div>
+					<div class="badeTittel"></div>
+				</div>
+			  		<div class="badeBes">
+						<div class="tilbud-grid">
+							<div class="grid-container"></div>
+						</div>
+						<div class="badevannskvalitet">&#x25FE; Vannkval.:&nbsp;<span></span></div>
+						<div class="badetemp">&#x25FE; Vanntemp.:&nbsp;<span></span></div>
+
+						<p></p>
+					
+					</div>
+
+			</div>
+	  	</div>
+
+
+	  	<div id="myModal" class="modal modal360">
+
+			  	<!-- Modal content -->
+			<div class="modal-content">
+				<div id="lukk">
+					<span id="stedsnavn"></span>
+					<span class="close">&times;&nbsp;</span>
+				</div>
+			    <div id="ifraClass">
+			    	<iframe id="popup360" src=""></iframe>
+			    </div>
+			</div>
+
+		</div>
+
+		<div id="kamera">
+		</div>
+
+
+
+	</div>
+
+
+
+
+	<!-- START INFOVINDU -->
+	<div class="InfoVindu">
+		<div id="genInfo" class="oppstart">
+			<div id="infoTittel">Ut i Sarpsborg</div>
+			<div class="kategorier">
+				<div class="cat" id="badesteder">
+					<div class="catdiv">Badesteder</div>
+				</div>
+				<div class="cat" id="turloyper">
+					<div class="catdiv">Turløyper</div>
+				</div>
+				<div class="cat" id="idrett">
+					<div class="catdiv">Aktiviteter</div>
+				</div>
+			</div>
+			<div id="infoknapp"><img src="information.png" style="height: 35px; width: 35px"></div>
+		</div>
+
+		<div id="genBadeInfo">
+			<span class="lukkKat">&times;</span>
+			<div id="genBadeTittel"><h4>Badesteder</h4></div>
+			<div id="genBadeBes">Her ser du en oversikt over de ulike badeplassene i Sarpsborg Kommune. Ved å klikke deg inn på de enkelte badeplassene i kartet vil du få opp informasjon om badeplassen, samt et 360-bilde. Du vil også få en oversikt over hvilke fasiliteter som tilbys på den aktuelle badeplassen.</div>
+
+		</div>
+
+		<div class="badeInfo">
+			<div class="badeHeader">
+				<div class="lukkBad">
+					<span  class="lukkKat lukkX">&times;</span>
+				</div>
+				<div class="badeTittel"></div>
+			</div>
+			
+			<div class="badeContainer">
+				<div class="badeBes">
+					<div class="tilbud-grid">
+						<div class="grid-container"></div>
+					</div>
+					<div class="badevannskvalitet">&#x25FE; Vannkval.:&nbsp;<span></span></div>
+					<div class="badetemp">&#x25FE; Vanntemp.:&nbsp;<span></span></div>
+
+					<p></p>
+				
+				</div>
+
+			</div>
+		</div>
+
+		<div id="genTurInfo">
+
+			<span class="lukkKat lukkX">&times;</span>
+			<div id="genTurTittel"><h4>Turløyper</h4></div>
+			<div id="genTurBes">Sarpsborg har mange fine turløyper rundt om i kommunen. I dette kartet vises et utvalgt av noen av de flotteste turene. Ved å klikke på turene vil du kunne få litt info om turen, samt en terrengprofil som viser terrengvariasjoner på turen.</div>
+		</div>
+
+		<div id="turInfo">
+
+			<div id="turHeader">
+				<div id="lukkTur">
+					<span  class="lukkKat lukkX">&times;</span>
+				</div>
+				<div id="turTittel"></div>
+			</div>
+
+			<!--<span id="lukkTur" class="lukkX">&times;</span>
+			<div id="turTittel"></div>-->
+			<div class="turInfo_container">
+			  
+			  <div id="turInfoBes" class="tab tabKat">
+			    <div id="turInfoTab"></div>
+			  </div>
+
+			  <div id="Terrengprofil" class="tab tabKat">
+			    <img id="terrengIMG" src="">
+			  </div>
+
+			</div>
+
+		</div>
+
+
+	<!-- SLUTT PÅ INFOVINDU -->
+	</div>
+
+</body>
+</html>

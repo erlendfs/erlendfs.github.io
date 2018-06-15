@@ -1,0 +1,1744 @@
+body {
+  font-family: rubik;
+  overflow: none;
+}
+
+html,
+body,
+  #viewDiv {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+  }
+
+
+      /* The Modal (background) */
+.modal360 {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    margin: auto; 
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #5e5e5e;
+    margin: auto;
+    border: 1px solid #888;
+    width: 90%;
+    height: 95%;
+    margin-top: 2%; 
+}
+
+/* The Close Button */
+.close {
+    color: #f7f4f4;
+    float: right;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+#lukk {
+  height: 5%;
+  width: 100%;
+  font-size: 4vh; 
+}
+#ifraClass {
+  height: 95%;
+  width: 100%;
+  display: block;
+}
+#popup360 {
+  display: block;
+  min-height: 100%;
+  width: 100%;
+  border: none;
+}
+#stedsnavn {
+  display: inline-block;
+  color: white;
+  font-family: sans-serif;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto;
+  width: 80%;
+  margin: auto;
+  flex-wrap: wrap;
+}
+
+.tilbud-grid {
+  height: 40%;
+  width: 100%;
+  //overflow: scroll;
+}
+#genBadeInfo span {
+  width: 5%;
+  font-size: 28px;
+  margin-left: 6px;
+  color: #333333;
+}
+
+#genBadeTittel {
+  height: 10%;
+  width: 80%;
+  display: inline-block;
+  //padding-top: 5%; 
+}
+
+
+
+.turInfo_container {
+  width: 94%;
+  margin-right: 3%;
+  margin-left: 3%;
+  height: 80%;
+  border: solid #56595b 1px;
+}
+#turInfoBes {
+  width: 100%;
+  height: 50%;
+  float: left;
+}
+
+#Terrengprofil {
+  width: 100%;
+  height: 50%;
+  float: left;
+
+}
+
+#terrengIMG {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.lukkX {
+  font-size: 28px;
+  margin-left: 6px;
+}
+
+.lukkKat {
+  font-size: 28px;
+  //margin-left: 6px;
+  color: #333333;
+}
+
+
+
+
+
+.badevannskvalitet {
+  color: #061a3a;
+  font-size: 14px; 
+}
+.badetemp {
+  color: #061a3a;
+  font-size: 14px; 
+}
+
+
+
+/* 
+  ##Device = Desktops
+  ##Screen = 1281px to higher resolution desktops
+*/
+
+@media (min-width: 1281px) {
+    body {
+    font-size: 14px;
+  }
+
+  .KartVindu {
+    width: 80%;
+    height: 100%;
+    float: right;
+    position: relative;
+  }
+  .KartVinduHalf {
+    width: 100%;
+    height: 70%;
+  }
+  .KartVinduNorm {
+    width: 90%;
+    height: 100%;
+  }
+  .KartVinduBad {
+    width: 100%;
+    height: 100%;
+  }
+
+  .InfoVindu {
+    width: 20%;
+    height: 100%;
+  }
+  .InfoVinduHalf {
+    width: 100%;
+    height: 30%;
+    display: inline-block;
+  }
+  .InfoVinduNorm {
+    width: 10%;
+    height: 100%;
+  }
+
+
+
+  .modal360 {
+    right: 0;
+    width: 100%;
+  }
+  #infoTittel {
+    font-family: Rubik;
+    font-size: 30px;
+    text-align: center; 
+    vertical-align: middle;
+    height: 15%;
+    width: 100%;
+  }
+  .kategorier {
+    height: 65%;
+    width: 100%;
+
+  }
+  .kategorierNorm {
+    height: 85%;
+  }
+
+  #infoknapp {
+    width: 30%;
+    height: 14%;
+    margin: auto;
+    display: none;
+  }
+
+  #infoknapp img:hover {
+    cursor: pointer;
+
+  }
+
+
+  .gen-modal {
+    width: 40%;
+    height: 25%;
+    margin-left: 30%;
+    margin-top: 15%;
+    display: none;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    overflow: auto;
+    background-color: white;
+    background-color: rgba(217, 217, 217, 0.7);
+    border-radius: 10px;
+  }
+
+  .gen-modalContent {
+    width: 90%;
+    height: 90%;
+    overflow: auto;
+    margin: auto;
+    margin-top: 5%;
+  }
+  #genCatTittel {
+    font-size: 18px;
+    font-weight: bold;
+    display: inline;
+    margin-left: 25%;
+    margin-bottom: 5px; 
+  }
+
+
+  .modalBad {
+    width: 20%;
+    height: 45%;
+    margin-left: 2%;
+    margin-top: 40%;
+    display: none;
+    position: fixed;
+    z-index: 1;
+    bottom: 50px;
+    overflow: auto;
+    background-color: white;
+    background-color: rgba(217, 217, 217, 0.7);
+    border-radius: 10px;
+  }
+  .modalBadContent {
+    width: 90%;
+    height: 90%;
+    overflow: auto;
+    margin: auto;
+    margin-top: 6%;
+    background-color: #f2f2f2
+  }
+
+
+
+  .cat {
+    height: 33%;
+    width: 70%;
+    margin: auto;
+    margin-bottom: 5%;
+    border-radius: 14px;
+    border: 1.5px solid #808080;
+
+
+  }
+
+  .cat:hover{
+    cursor: pointer; 
+    font-size: 20px;
+    color: white;
+    text-shadow: 0 0 2px black;
+  }
+
+  .catdiv {
+    width: 70%;    
+    height: 20%;
+    margin: auto;
+    text-align: center;
+    font-family: Rubik;
+    font-size: 15;
+  }
+
+  .catNorm {
+    height: 30%;
+
+  }
+  .catDivNorm {
+    writing-mode: vertical-rl;
+  }
+  .catActive {
+    border: solid #ff884d 3px;
+  }
+
+
+
+
+  #kamera {
+    background: url(camera360_5.png); 
+    height: 50px; 
+    width: 50px; 
+    //z-index:1; 
+    background-size: cover; 
+    position: absolute; 
+    top: 140px; 
+    left: 6px; 
+    display: none;
+  }
+
+
+
+  #badesteder  {
+    background: url("badesteder_sm1.jpg");
+    background-size: cover;
+  }
+  #badesteder:hover  {
+    background: url("badesteder_sm.jpg");
+    background-size: cover;
+  }
+  #turloyper  {
+    background: url("marka_sm1.jpg");
+    background-size: cover;
+  }
+  #turloyper:hover {
+    background: url("marka_sm.jpg");    
+    background-size: cover;
+  }
+  #idrett  {
+    background: url("idrett_sm1.jpg");
+    background-size: cover;
+  }
+  #idrett:hover {
+    background: url("idrett_sm.jpg");
+    background-size: cover;
+  }
+
+  .badeInfo {
+    width: 100%;
+    height: 100%;
+    display: none;
+    background: url("bakgrunn1.jpg");
+    
+  }
+
+  .badeContainer {
+    height: 88%;
+    width: 100%;
+    margin: auto;
+  }
+
+  .badeHeader {
+    height: 12%;
+    width: 100%;
+  }
+  .lukkBad {
+    height: 100%;
+    width: 10%;
+    float: left;
+  }
+
+  .badeBes{
+    width: 99%;
+    height: 88%;
+    margin: auto;
+    font-size: 14px;
+    background-color: #f2f2f2;
+    overflow: auto;
+  }
+  .badeBes p {
+    padding: 5px;
+    margin-top: 3px;
+
+  }
+  #genInfo {
+    height: 100%;
+    width: 100%;
+    background: url("bakgrunn1.jpg");
+  }
+  #genBadeInfo {
+    height: 100%;
+    width: 100%;
+    display: none;
+    background: url("bakgrunn1.jpg");
+  }
+
+  #genBadeTittel h4 {
+    font-size: 16;
+    text-align: center;
+    margin: 0;
+    font-family: sans-serif;
+  }
+  #genBadeBes {
+    width: 80%;
+    height: 70%;
+    margin: auto;
+    overflow: scroll;
+    margin-top: 3%;
+
+  }
+
+  #vaerdiv {
+    width: 80%;
+    padding-right: 1%;
+    padding-left: 1%;
+    margin: auto;
+    display: inline-block;
+  }
+
+  .badeTittel {
+    height: 100%;
+    width: 80%;
+    font-size: 20px;
+    text-align: center;
+    float: left;  
+  }
+
+  .badeTittelSpan {
+    font-size: 25px;
+    font-family: sans-serif;
+    text-align: center;
+  }
+
+    
+  #genTurInfo {
+    height: 100%;
+    width: 100%;
+    display: none;
+    background: url("bakgrunn1.jpg");
+  }
+  #genTurTittel {
+    height: 10%;
+    width: 90%;
+    display: inline-block;
+    //padding-top: 5%; 
+  }
+  #genTurTittel h4 {
+    font-size: 16;
+    text-align: center;
+    margin: 0;
+  }
+
+  #turHeader {
+    height: 12%;
+    width: 100%;
+  }
+  #lukkTur {
+    height: 100%;
+    width: 10%;
+    float: left;
+  }
+
+  #turInfo {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    display: none;
+    background: url("bakgrunn1.jpg");
+  }
+  #turTittel {
+    height: 100%;
+    width: 80%;
+    font-size: 20px;
+    text-align: center;
+    float: left;  
+    padding-top: 5px;
+  }
+  #turInfoTab {
+    width: 80%;
+    height: 90%;
+    margin: auto; 
+    margin-top: 5%;
+  }
+
+    #turInfoBes {
+    width: 30%;
+    height: 100%;
+    float: left;
+  }
+
+  #Terrengprofil {
+    width: 70%;
+    height: 100%;
+    float: left;
+
+  }
+
+
+  
+  
+  .grid-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px; 
+    height: 30px;
+    width: 30px;
+
+  }
+  .grid-item img {
+    max-width: 30px;
+    max-height: 30px;
+  }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 90%;
+    margin: auto;
+    flex-wrap: wrap;
+  }
+
+  .tilbud-grid {
+    margin-top: 3px;
+    margin-bottom: 10px;
+    height: 70px;
+    width: 100%;
+    //overflow: scroll;
+  }
+
+  
+  .lukkKat:hover {
+    cursor: pointer;
+    color: #7a7474;
+  }
+
+
+
+  .badevannskvalitet {
+    color: #061a3a;
+    font-size: 14px; 
+    margin-bottom: 5px;
+    padding-right: 3px;
+    padding-left: 3px;
+  }
+  .badetemp {
+    color: #061a3a;
+    font-size: 14px; 
+    margin-bottom: 5px;
+    padding-right: 3px;
+    padding-left: 3px;
+  }
+  
+  
+}
+
+
+
+
+
+/*******************************
+****** START OF Small Desktop ****
+********************************/
+
+
+/* 
+  ##Device = Laptops, Desktops
+  ##Screen = B/w 1025px to 1280px
+*/
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+
+  body {
+    font-size: 14px;
+  }
+
+  .KartVindu {
+    width: 80%;
+    height: 100%;
+    float: right;
+    position: relative;
+  }
+  .KartVinduHalf {
+    width: 100%;
+    height: 70%;
+  }
+  .KartVinduNorm {
+    width: 90%;
+    height: 100%;
+  }
+  .KartVinduBad {
+    width: 100%;
+    height: 100%;
+  }
+
+  .InfoVindu {
+    width: 20%;
+    height: 100%;
+  }
+  .InfoVinduHalf {
+    width: 100%;
+    height: 30%;
+    display: inline-block;
+  }
+  .InfoVinduNorm {
+    width: 10%;
+    height: 100%;
+  }
+
+
+
+  .modal360 {
+    right: 0;
+    width: 100%;
+  }
+  #infoTittel {
+    font-family: Rubik;
+    font-size: 30px;
+    text-align: center; 
+    vertical-align: middle;
+    height: 15%;
+    width: 100%;
+  }
+  .kategorier {
+    height: 65%;
+    width: 100%;
+
+  }
+  .kategorierNorm {
+    height: 85%;
+  }
+
+  #infoknapp {
+    width: 30%;
+    height: 14%;
+    margin: auto;
+    display: none;
+  }
+
+  #infoknapp img:hover {
+    cursor: pointer;
+
+  }
+
+
+  .gen-modal {
+    width: 40%;
+    height: 25%;
+    margin-left: 30%;
+    margin-top: 15%;
+    display: none;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    overflow: auto;
+    background-color: white;
+    background-color: rgba(217, 217, 217, 0.7);
+    border-radius: 10px;
+  }
+
+  .gen-modalContent {
+    width: 90%;
+    height: 90%;
+    overflow: auto;
+    margin: auto;
+    margin-top: 5%;
+  }
+  #genCatTittel {
+    font-size: 18px;
+    font-weight: bold;
+    display: inline;
+    margin-left: 25%;
+    margin-bottom: 5px; 
+  }
+
+
+  .modalBad {
+    width: 30%;
+    height: 45%;
+    margin-left: 2%;
+    margin-top: 40%;
+    display: none;
+    position: fixed;
+    z-index: 1;
+    bottom: 50px;
+    overflow: auto;
+    background-color: white;
+    background-color: rgba(217, 217, 217, 0.7);
+    border-radius: 10px;
+  }
+  .modalBadContent {
+    width: 90%;
+    height: 90%;
+    overflow: auto;
+    margin: auto;
+    margin-top: 6%;
+    background-color: #f2f2f2
+  }
+
+
+
+  .cat {
+    height: 33%;
+    width: 70%;
+    margin: auto;
+    margin-bottom: 5%;
+    border-radius: 14px;
+    border: 1.5px solid #808080;
+
+
+  }
+
+  .cat:hover{
+    cursor: pointer; 
+    font-size: 20px;
+    color: white;
+    text-shadow: 0 0 2px black;
+  }
+
+  .catdiv {
+    width: 70%;    
+    height: 20%;
+    margin: auto;
+    text-align: center;
+    font-family: Rubik;
+    font-size: 15;
+  }
+
+  .catNorm {
+    height: 30%;
+
+  }
+  .catDivNorm {
+    writing-mode: vertical-rl;
+  }
+  .catActive {
+    border: solid #ff884d 3px;
+  }
+
+
+
+
+  #kamera {
+    background: url(camera360_5.png); 
+    height: 50px; 
+    width: 50px; 
+    //z-index:1; 
+    background-size: cover; 
+    position: absolute; 
+    top: 140px; 
+    left: 6px; 
+    display: none;
+  }
+
+
+
+  #badesteder  {
+    background: url("badesteder_sm1.jpg");
+    background-size: cover;
+  }
+  #badesteder:hover  {
+    background: url("badesteder_sm.jpg");
+    background-size: cover;
+  }
+  #turloyper  {
+    background: url("marka_sm1.jpg");
+    background-size: cover;
+  }
+  #turloyper:hover {
+    background: url("marka_sm.jpg");    
+    background-size: cover;
+  }
+  #idrett  {
+    background: url("idrett_sm1.jpg");
+    background-size: cover;
+  }
+  #idrett:hover {
+    background: url("idrett_sm.jpg");
+    background-size: cover;
+  }
+
+  .badeInfo {
+    width: 100%;
+    height: 100%;
+    display: none;
+    background: url("bakgrunn1.jpg");
+    
+  }
+
+  .badeContainer {
+    height: 88%;
+    width: 100%;
+    margin: auto;
+  }
+
+  .badeHeader {
+    height: 12%;
+    width: 100%;
+  }
+  .lukkBad {
+    height: 100%;
+    width: 10%;
+    float: left;
+  }
+
+  .badeBes{
+    width: 99%;
+    height: 88%;
+    margin: auto;
+    font-size: 14px;
+    background-color: #f2f2f2;
+    overflow: auto;
+  }
+  .badeBes p {
+    padding: 5px;
+    margin-top: 3px;
+
+  }
+  #genInfo {
+    height: 100%;
+    width: 100%;
+    background: url("bakgrunn1.jpg");
+  }
+  #genBadeInfo {
+    height: 100%;
+    width: 100%;
+    display: none;
+    background: url("bakgrunn1.jpg");
+  }
+
+  #genBadeTittel h4 {
+    font-size: 16;
+    text-align: center;
+    margin: 0;
+    font-family: sans-serif;
+  }
+  #genBadeBes {
+    width: 80%;
+    height: 70%;
+    margin: auto;
+    overflow: scroll;
+    margin-top: 3%;
+
+  }
+
+  #vaerdiv {
+    width: 80%;
+    padding-right: 1%;
+    padding-left: 1%;
+    margin: auto;
+    display: inline-block;
+  }
+
+  .badeTittel {
+    height: 100%;
+    width: 80%;
+    font-size: 20px;
+    text-align: center;
+    float: left;  
+  }
+
+  .badeTittelSpan {
+    font-size: 25px;
+    font-family: sans-serif;
+    text-align: center;
+  }
+
+    
+  #genTurInfo {
+    height: 100%;
+    width: 100%;
+    display: none;
+    background: url("bakgrunn1.jpg");
+  }
+  #genTurTittel {
+    height: 10%;
+    width: 90%;
+    display: inline-block;
+    //padding-top: 5%; 
+  }
+  #genTurTittel h4 {
+    font-size: 16;
+    text-align: center;
+    margin: 0;
+  }
+
+  #turHeader {
+    height: 12%;
+    width: 100%;
+  }
+  #lukkTur {
+    height: 100%;
+    width: 10%;
+    float: left;
+  }
+
+  #turInfo {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    display: none;
+    background: url("bakgrunn1.jpg");
+  }
+  #turTittel {
+    height: 100%;
+    width: 80%;
+    font-size: 20px;
+    text-align: center;
+    float: left;  
+    padding-top: 5px;
+  }
+  #turInfoTab {
+    width: 80%;
+    height: 90%;
+    margin: auto; 
+    margin-top: 5%;
+  }
+
+    #turInfoBes {
+    width: 30%;
+    height: 100%;
+    float: left;
+  }
+
+  #Terrengprofil {
+    width: 70%;
+    height: 100%;
+    float: left;
+
+  }
+
+
+  
+  
+  .grid-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px; 
+    height: 30px;
+    width: 30px;
+
+  }
+  .grid-item img {
+    max-width: 30px;
+    max-height: 30px;
+  }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 90%;
+    margin: auto;
+    flex-wrap: wrap;
+  }
+
+  .tilbud-grid {
+    margin-top: 3px;
+    margin-bottom: 10px;
+    height: 70px;
+    width: 100%;
+    //overflow: scroll;
+  }
+
+  
+  .lukkKat:hover {
+    cursor: pointer;
+    color: #7a7474;
+  }
+
+
+
+  .badevannskvalitet {
+    color: #061a3a;
+    font-size: 14px; 
+    margin-bottom: 5px;
+    padding-right: 3px;
+    padding-left: 3px;
+  }
+  .badetemp {
+    color: #061a3a;
+    font-size: 14px; 
+    margin-bottom: 5px;
+    padding-right: 3px;
+    padding-left: 3px;
+  }
+
+
+}
+
+
+/*******************************
+****** END OF Small Desktop ****
+********************************/
+
+
+
+
+
+
+
+
+
+
+
+/* 
+  ##Device = Tablets, Ipads (portrait)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) {
+
+  
+  
+}
+
+/* 
+  ##Device = Tablets, Ipads (landscape)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 813px) and (max-width: 1024px) and (orientation: landscape) {
+
+  
+  
+}
+
+/* 
+  ##Device = Low Resolution Tablets, Mobiles (Landscape)
+  ##Screen = B/w 481px to 767px
+*/
+
+@media (min-width: 481px) and (max-width: 812px) {
+  .KartVindu {
+    width: 70%;
+    height: 100%;
+    float: right;
+    position: relative;
+  }
+  .KartVinduHalf {
+    width: 50%;
+    height: 100%;
+    float: right;
+  }
+  .KartVinduNorm {
+    width: 90%;
+    height: 100%;
+  }
+
+  .InfoVindu {
+    width: 30%;
+    height: 100%;
+  }
+  .InfoVinduHalf {
+    width: 50%;
+    height: 100%;
+    float: left;
+  }
+  .InfoVinduNorm {
+    width: 10%;
+    height: 100%;
+  }
+
+  .modal360 {
+    right: 0;
+    width: 70%;
+  }
+  .modalBad {
+    display: none;
+    height: 0%;
+    width: 0%;
+  }
+  #infoTittel {
+    font-family: Rubik;
+    font-size: 30px;
+    text-align: center; 
+    vertical-align: middle;
+    height: 15%;
+    width: 100%;
+  }
+  .kategorier {
+    height: 65%;
+    width: 100%;
+
+  }
+  .kategorierNorm {
+    height: 85%;
+  }
+
+  #infoknapp {
+    width: 100%;
+    height: 14%;
+    padding-left: 25%;
+    margin: auto;
+    display: none;
+  }
+
+
+  .gen-modal {
+    width: 40%;
+    height: 75%;
+    margin-left: 30%;
+    margin-top: 5%;
+    display: none;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    overflow: auto;
+    background-color: white;
+    background-color: rgba(217, 217, 217, 0.7);
+    border-radius: 10px;
+  }
+
+  .gen-modalContent {
+    width: 90%;
+    height: 90%;
+    overflow: auto;
+    margin: auto;
+    margin-top: 5%;
+  }
+  #genCatTittel {
+    font-size: 18px;
+    font-weight: bold;
+    display: inline;
+    margin-left: 25%;
+    margin-bottom: 5px; 
+  }
+
+
+
+  .cat {
+    height: 33%;
+    width: 70%;
+    margin: auto;
+    margin-bottom: 5%;
+    border-radius: 14px;
+    border: 1.5px solid #808080;
+  }
+  .catdiv {
+    width: 70%;    
+    height: 20%;
+    margin: auto;
+    text-align: center;
+    font-family: Rubik;
+    font-size: 15;
+  }
+
+  .catNorm {
+    height: 30%;
+
+  }
+  .catDivNorm {
+    writing-mode: vertical-rl;
+  }
+  .catActive {
+    border: solid #ff884d 3px;
+  }
+
+
+
+
+  #kamera {
+    background: url(camera360_5.png); 
+    height: 50px; 
+    width: 50px; 
+    //z-index:1; 
+    background-size: cover; 
+    position: absolute; 
+    bottom: 20px; 
+    left: 10px; 
+    display: none;
+  }
+
+
+
+  #badesteder  {
+    background: 
+      
+      url("badesteder_sm1.jpg");
+    background-size: cover;
+  }
+  #turloyper  {
+    background: 
+      
+      url("marka_sm1.jpg");
+    background-size: cover;
+  }
+  #idrett  {
+    background: 
+      
+      url("idrett_sm1.jpg");
+    background-size: cover;
+  }
+
+  .badeInfo {
+    width: 100%;
+    height: 100%;
+    display: none;
+    background: url("bakgrunn1.jpg");
+    
+  }
+
+  .badeContainer {
+    height: 88%;
+    width: 100%;
+    margin: auto;
+  }
+
+  .badeHeader {
+    height: 12%;
+    width: 100%;
+  }
+  .lukkBad {
+    height: 100%;
+    width: 10%;
+    float: left;
+  }
+
+  .badeBes{
+    width: 99%;
+    height: 100%;
+    margin: auto;
+    font-size: 12px;
+    background-color: #f2f2f2;
+    overflow: auto;
+  }
+  .badeBes p {
+    padding: 3px;
+    margin-top: 3px;
+
+  }
+  #genInfo {
+    height: 100%;
+    width: 100%;
+    background: url("bakgrunn1.jpg");
+  }
+  #genBadeInfo {
+    height: 100%;
+    width: 100%;
+    display: none;
+    background: url("bakgrunn1.jpg");
+  }
+
+  #genBadeTittel h4 {
+    font-size: 16;
+    text-align: center;
+    margin: 0;
+    font-family: sans-serif;
+  }
+  #genBadeBes {
+    width: 80%;
+    height: 70%;
+    margin: auto;
+    overflow: scroll;
+    margin-top: 3%;
+
+  }
+
+  #vaerdiv {
+    width: 80%;
+    padding-right: 1%;
+    padding-left: 1%;
+    margin: auto;
+    display: inline-block;
+  }
+
+  .badeTittel {
+    height: 100%;
+    width: 80%;
+    font-size: 20px;
+    text-align: center;
+    float: left;  
+    margin-left: 5%;
+  }
+  .badeTittelSpan {
+    font-size: 25px;
+    font-family: sans-serif;
+    text-align: center;
+
+  }
+
+    
+  #genTurInfo {
+    height: 100%;
+    width: 100%;
+    display: none;
+    background: url("bakgrunn1.jpg");
+  }
+  #genTurTittel {
+    height: 10%;
+    width: 90%;
+    display: inline-block;
+    //padding-top: 5%; 
+  }
+  #genTurTittel h4 {
+    font-size: 16;
+    text-align: center;
+    margin: 0;
+  }
+
+  #turInfo {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    display: none;
+    background: url("bakgrunn1.jpg");
+  }
+  #turTittel {
+    height: 10%;
+    width: 80%;
+    display: inline-block;
+    padding-top: 2%;
+    font-size: 20px;
+    text-align: center;
+
+  }
+  #turInfoTab {
+    width: 80%;
+    height: 90%;
+    margin: auto; 
+    margin-top: 5%;
+  }
+  
+  
+  .grid-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px; 
+    height: 30px;
+    width: 30px;
+
+  }
+  .grid-item img {
+    max-width: 30px;
+    max-height: 30px;
+  }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 90%;
+    margin: auto;
+    flex-wrap: wrap;
+  }
+
+  .tilbud-grid {
+    margin-top: 3px;
+    height: 70px;
+    width: 100%;
+    //overflow: scroll;
+  }
+
+
+
+
+}
+
+
+/* 
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+
+@media (min-width: 320px) and (max-width: 480px) {
+
+  .KartVindu {
+    width: 100%;
+    height: 70%;
+    position: relative;
+  }
+  .KartVinduHalf {
+    width: 100%;
+    height: 50%;
+  }
+  .KartVinduNorm {
+    width: 100%;
+    height: 90%;
+  }
+
+  .InfoVindu {
+    width: 100%;
+    height: 30%;
+  }
+  .InfoVinduHalf {
+    width: 100%;
+    height: 50%;
+  }
+  .InfoVinduNorm {
+    width: 100%;
+    height: 10%;
+  }
+
+  .modalBad {
+    display: none;
+    height: 0%;
+    width: 0%;
+  }
+  .modal360 {
+    width: 100%;
+    height: 70%;
+  }
+
+  .gen-modal {
+    width: 75%;
+    height: 40%;
+    margin-left: 12.5%;
+    margin-top: 30%;
+    display: none;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    overflow: auto;
+    background-color: white;
+    background-color: rgba(217, 217, 217, 0.7);
+    border-radius: 10px;
+
+  }
+
+  .gen-modalContent {
+    width: 90%;
+    height: 90%;
+    overflow: auto;
+    margin: auto;
+    margin-top: 5%;
+  }
+  #genCatTittel {
+    font-size: 18px;
+    font-weight: bold;
+    display: inline;
+    margin-left: 25%;
+    margin-bottom: 5px; 
+  }
+
+
+  #infoknapp {
+    width: 14%;
+    height: 100%;
+    float: right;
+    padding-top: 3%;
+    margin: auto;
+    display: none;
+  }
+
+
+  #infoTittel {
+    font-family: Rubik;
+    font-size: 30px;
+    text-align: center; 
+    vertical-align: middle;
+    height: 15%;
+    width: 100%;
+  }
+  .kategorier {
+    height: 40%;
+    width: 100%;
+    overflow: none;
+
+  }
+  .kategorierNorm {
+    height: 100%;
+    width: 85%;
+    font-size: 13px;
+    display: inline-block;
+  }
+  .cat {
+    float: left;
+    height: 70%;
+    width: 28%;
+    margin: auto;
+    margin-top: 2%;
+    margin-left: 3%;
+    border-radius: 14px;
+    border: 1.5px solid #808080;
+  }
+  .cat div {  
+    height: 20%;
+    margin: auto;
+    text-align: center;
+    font-family: Rubik;
+    font-size: 15;
+  }
+  .catActive {
+    border: solid #ff884d 3px;
+  }
+
+  #badesteder  {
+    background: 
+      
+      url("badesteder_sm1.jpg");
+    background-size: cover;
+  }
+  #turloyper  {
+    background: 
+      
+      url("marka_sm1.jpg");
+    background-size: cover;
+  }
+  #idrett  {
+    background: 
+      
+      url("idrett_sm1.jpg");
+    background-size: cover;
+  }
+
+  .badeContainer {
+    height: 80%;
+    width: 100%;
+    margin: auto;
+  }
+
+  .badeHeader {
+    height: 20%;
+    width: 100%;
+  }
+  .lukkBad {
+    height: 100%;
+    width: 10%;
+    float: left;
+  }
+
+  .badeTittel {
+    height: 100%;
+    width: 80%;
+    font-size: 20px;
+    text-align: center;
+    float: left;  
+  }
+
+  #turHeader {
+    height: 12%;
+    width: 100%;
+  }
+  #lukkTur {
+    height: 100%;
+    width: 10%;
+    float: left;
+  }
+
+  #turTittel {
+    height: 100%;
+    width: 80%;
+    font-size: 20px;
+    text-align: center;
+    float: left;  
+  }
+
+  #turInfoBes {
+
+  }
+
+
+  .badeBes{
+    width: 100%;
+    height: 100%;
+    //margin-left: 2.5%;
+    float: left;
+    font-size: 12px;
+    background-color: #f2f2f2;
+    //border: solid #404040 1px;
+    //border-radius: 8px;
+    overflow: auto;
+  }
+  .badeBes p {
+    padding: 3px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+
+  }
+
+  #kamera {
+    background: url(camera360_5.png); 
+    height: 50px; 
+    width: 50px; 
+    //z-index:1; 
+    background-size: cover; 
+    position: absolute; 
+    bottom: 20px; 
+    right: 10px; 
+    display: none;
+  }
+
+
+  #genInfo {
+    height: 100%;
+    width: 100%;
+    background: url("bakgrunn1.jpg");
+  }
+  #genBadeInfo {
+    height: 100%;
+    width: 100%;
+    display: none;
+    background: url("bakgrunn1.jpg");
+  }
+
+  .lukkKat {
+    font-size: 28px;
+    //margin-left: 6px;
+    color: #333333;
+  }
+
+  #genBadeTittel {
+    height: 10%;
+    width: 90%;
+    //padding-top: 5%; 
+  }
+  #genBadeTittel h4 {
+    font-size: 16;
+    text-align: center;
+    margin: 0;
+  }
+  #genBadeBes {
+    width: 80%;
+    height: 70%;
+    margin: auto;
+    overflow: scroll;
+    margin-top: 3%;
+
+  }
+
+  #genTurInfo {
+    height: 100%;
+    width: 100%;
+    display: none;
+    background: url("bakgrunn1.jpg");
+  }
+  #genTurTittel {
+    height: 10%;
+    width: 80%;
+    display: inline-block;
+    //padding-top: 5%; 
+  }
+  #genTurTittel h4 {
+    font-size: 16;
+    text-align: center;
+    margin: 0;
+  }
+  #genTurBes {
+    width: 80%;
+    height: 70%;
+    margin: auto;
+    overflow: scroll;
+    margin-top: 3%;
+
+  }
+  #turInfo {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    display: none;
+    background: url("bakgrunn1.jpg");
+  }
+
+  #turInfoTab {
+    width: 80%;
+    height: 90%;
+    margin: auto; 
+    margin-top: 5%
+  }
+  
+  .badeInfo {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    display: none;
+    background: url("bakgrunn1.jpg");
+    
+  }
+
+
+
+  #vaerdiv {
+    width: 80%;
+    padding-right: 1%;
+    padding-left: 1%;
+    margin: auto;
+    display: inline-block;
+  }
+
+
+
+  .badeTittelSpan {
+    font-size: 25px;
+    font-family: sans-serif;
+    text-align: center; 
+  }
+
+
+
+  .grid-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px; 
+    height: 30px;
+    width: 30px;
+
+  }
+  .grid-item img {
+    max-width: 30px;
+    max-height: 30px;
+  }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    width: 90%;
+    margin: auto;
+    flex-wrap: wrap;
+  }
+
+  .tilbud-grid {
+    margin-top: 3px;
+    height: 30px;
+    width: 100%;
+    overflow: scroll;
+  }
+  
+  
+}
+
