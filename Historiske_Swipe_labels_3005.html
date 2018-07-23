@@ -96,6 +96,22 @@
       line-height: 34px;
     }
 
+    #nonswipeaar{
+      position: absolute;
+      top: 15px;
+      width: 65px; 
+      left: 45%;
+      height: 34px;
+      z-index: 50;
+      background-color: #ffffff;
+      border: 2px solid #4286f4;
+      border-radius: 10px;
+      text-align: center;
+      vertical-align: middle;
+      line-height: 34px;
+      font-size: medium;
+    }
+
     .btn-group {
       position: absolute;
       border: 1px solid black;
@@ -105,6 +121,7 @@
       left: 15px;
       height: auto;
       z-index: 50;
+      background-color: #cdcdcd;
     }
     .btn {
       width: 92px;
@@ -131,10 +148,10 @@
 
     /*
     
-    Dersom nye historiske lag skal legges til i kartløsningen må de legges til som et eget lag fra norkart-WMS'en. 
-    lagnavnet må slutte på årstallet, slik at årstallet blir navnet på laget i drop-up menyen hvor årstall velges.
+    Dersom nye historiske lag skal legges til i kartløsningen  må de legges til som et eget sublayer fra norkart-WMS'en i WebMap'et. 
+    Lagnavnet må slutte på årstallet, slik at årstallet blir navnet på laget i drop-up menyen hvor årstall velges.
 
-    Rekkefølgen på wms-lagene som er brukt i AGOL WebMapet gjenspeiles i denne kartløsningen.  
+    Rekkefølgen på wms-lagene som er brukt i AGOL WebMapet gjenspeiles i denne kartløsningen.  Stedsnavn-laget fra Kartverkets WMS fkb4 må ligge på toppen av innholdslisten i webmapet.
 
     */
 
@@ -146,31 +163,46 @@
       "dojo/_base/array",
       "esri/dijit/HomeButton",
       "esri/dijit/Search",
+      "esri/layers/ArcGISTiledMapServiceLayer",
       "dojo/domReady!"
     ], function(
-      Map, LayerSwipe, layer, arcgisUtils, array, HomeButton, Search
+      Map, LayerSwipe, layer, arcgisUtils, array, HomeButton, Search, ArcGISTiledMapServiceLayer
     )  {
       var WebMapID = "604b8670fb8c4ce6be5d2ab0e85eabb6";
       var mapDeferred = arcgisUtils.createMap(WebMapID, "map");
       mapDeferred.then(function(response){
-
+        console.log(response);
         var map = response.map;
+
         
+
+
+        var tiled = new ArcGISTiledMapServiceLayer("https://tiles.arcgis.com/tiles/43oQDcO8lvhTZSOO/arcgis/rest/services/ingenbilder/MapServer?token=IabNsPbTAAvstIdlHV5YUk2PJ8A0dMDubmMvhtPtkmTyt5PA2ep2uxiTItF20d6fD8BA6LJxZcPUqCKBuT0KZinZVZ-vfue4A_nYm6tmLklrJecp6CaWR0K1XiYOcjJDTdpBTI-e1zEbc6iHnBaOJCmyskjqXC6Jp1SR5Po7N-YRK-qLiL08mBQnc3Rt5MKgR2RQjhrKEmhee3rLrqTLhZKIJIvA_t4bA15Ksi1tVPdQjaAS78janQD0rNpItOXIPWVm9Qv-x-SrR3NvJ5NHtRt8Tgiapbt1HhidLIh133w.");
+        map.addLayer(tiled);
+        //tiled.hide();
+        map.reorderLayer(tiled, 1);
+
+
         //Lager en Array av objekter med hvert kartlag. 
         var layers = response.itemInfo.itemData.operationalLayers;
         layers.reverse();
         var sisteLE = layers.length-1;
         console.log(layers);
 
+        //Skrur av alle lagene i WebMap'et
         for (i = 1; i < layers.length; i++) {
           map.getLayer(layers[i].id).hide();
         };
-        //Setter det siste laget i listen til å være oppstarts-swipelaget dersom ingen lag er blitt valgt før swipe-widgeten skrus på. 
+
+        //Setter det siste laget i listen (sisteLE) til å være oppstarts-swipelaget dersom ingen lag er blitt valgt før swipe-widgeten skrus på. 
         forrigeAar = map.getLayer(layers[sisteLE].id);
         $("#aarsspan").text((layers[sisteLE].title).slice(-4));
+        $("#aarsspan3").text((layers[sisteLE].title).slice(-4));
         var forrige2 = (layers[sisteLE].title).slice(-4);
         console.log("SwipeLayer: " + layers[sisteLE].id);
 
+        //Lager og starter opp Swipe-Widgeten med det siste elementet i laglisten som det aktive swipelaget. 
+        
         swipeWidget = new LayerSwipe({
           type: "vertical",
           map: map,
@@ -181,43 +213,49 @@
         swipeWidget.disable();
 
         
-        //Aktiverer det laget som skal brukes i sveipingen. 
+        //activates the layer that's going to be used with the LayerSwipe 
         function createSwipe(swipeAar) {
           console.log("Aktiverer swipe med lag: "+swipeAar);
           var swipeAarLag = map.getLayer(swipeAar);
           swipeAarLag.show();
-          swipeWidget.layers=[swipeAarLag];
+          swipeWidget.layers=[tiled, swipeAarLag];
         };
         
 
-        //Skjuler "Slettefjerne"-knappen når den ikke skal brukes. 
+        //Hides the "Fjerne/Remove"-button as its not to be used before any layer has been turned on.
         $("#slettknapp").hide();
         $("#aarsdiv").hide();
+        $("#nonswipeaar").hide();
 
+        //on click event for Swipe-button
         $("#SwipeButton").on("click", function() {
+          tiled.show();
+          //If swiping is not active prior to clicking
           if ($("#SwipeButton").attr("class") ==="inActive") {
             $("#SwipeButton").attr('class', 'Active')    
-            /*Her kan du skrive koden for å aktivere Swiping med et bestemt lag*/ 
             map.getLayer(forrigeAar.id).hide();
+            //tiled.show();
             createSwipe(forrigeAar.id);
             swipeWidget.enable();
             $("#slettknapp").hide();
             $("#aarsdiv").show();
-            
+            $("#nonswipeaar").hide();
           }
-
+          //Hvis swiping er aktiv: merk swipingen som inaktiv og disable swiping.
           else if ($("#SwipeButton").attr("class") ==="Active") {
-            //Hvis swiping er aktiv: merk swipingen som inaktiv og disable swiping. 
             $("#SwipeButton").attr('class', 'inActive')
             swipeWidget.disable();
+            //tiled.hide();
             $("#slettknapp").show();
+            $("#nonswipeaar").show();
           }
           console.log($("#SwipeButton").attr('class'));
         });
 
 
-     
+        //Funksjon for bytte av år
         function velgAar(nyttAar) {
+          tiled.show();
           //Dersom swiping er aktiv
           if ($("#SwipeButton").attr("class") ==="Active") {
             for (i = 1; i < layers.length; i++) {
@@ -232,7 +270,9 @@
                 //slik at når swiping skrus på igjen er det det samme laget som blir skrudd på som sist. 
                 forrigeAar = map.getLayer(layers[i].id);
                 $("#aarsspan").text((layers[i].title).slice(-4));
+                $("#aarsspan3").text((layers[i].title).slice(-4));
                 $("#aarsdiv").show();
+                $("#nonswipeaar").show();
               }
             }
           }
@@ -248,31 +288,31 @@
                 //Skrur på laget som matcher med identifikatoren til elementet som ble trykket på i drop-up menyen. 
                 if (layers[i].title == nyttAar) {
                   map.getLayer(layers[i].id).show();
-
+                  //Lagre laget som nettopp ble skrudd på til variabel. 
                   forrigeAar = map.getLayer(layers[i].id);
                   $("#aarsspan").text((layers[i].title).slice(-4));
+                  $("#aarsspan3").text((layers[i].title).slice(-4));
                   $("#aarsdiv").show();
+                  $("#nonswipeaar").show();
                 }
               };
               $("#slettknapp").show();
           }
         };
 
-        var x=1;
+        //Starter løkken på 1 og ikke 0 for å hoppe over det første laget i listen "layers" som er labels fra FKB4 WMS.
         for (i = 1; i < layers.length; i++) {
           var tittel = layers[i].title;
           //Legg til LI items i UL med riktig formattert årstalls-navn
-          $("#ulScroll").append($("<li>").text(String(tittel.slice(-4))).attr("id", "nr"+x).attr("navn", tittel).addClass("clickAar"));
+          $("#ulScroll").append($("<li>").text(String(tittel.slice(-4))).attr("id", "nr"+i).attr("navn", tittel).addClass("clickAar"));
           //Legger til en bootstrap-divider som skiller liste items fra hverandre
-          $("#nr"+String(x)).append($("<div>").attr("class", "divider"));
-          x++;
+          $("#nr"+String(i)).append($("<div>").attr("class", "divider"));
         };
         
 
         /****************  Legger til on-click events på liste-items **************/
         $("ul").on("click", "li", function(event) {
-          event.preventDefault();
-          console.log( $(this).attr("navn"));
+          //event.preventDefault();
           velgAar( $(this).attr("navn") );
         });
 
@@ -281,8 +321,10 @@
         //fjerner det synlige laget når "Fjerne"-knappen trykkes på. 
         $("#slettknapp").on('click', function () {
           map.getLayer(forrigeAar.id).hide();
+          tiled.hide();
           $("#slettknapp").hide();
           $("#aarsdiv").hide();
+          $("#nonswipeaar").hide();
         });
 
         //Home knappen panorerer til lagret oppstartposisjon for WebMap 
@@ -339,6 +381,7 @@
       <span id="aarsspan"></span>
     </div>-->
     <div id="sarpkomm" onclick="location.href='https://www.sarpsborg.com';"></div>
+    <div id="nonswipeaar"><span id='aarsspan3'></span></div>
   </div>
 
     
