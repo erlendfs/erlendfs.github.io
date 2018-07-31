@@ -177,9 +177,9 @@
         
 
 
-        var tiled = new ArcGISTiledMapServiceLayer("https://tiles.arcgis.com/tiles/43oQDcO8lvhTZSOO/arcgis/rest/services/ingenbilder/MapServer?token=IabNsPbTAAvstIdlHV5YUk2PJ8A0dMDubmMvhtPtkmTyt5PA2ep2uxiTItF20d6fD8BA6LJxZcPUqCKBuT0KZinZVZ-vfue4A_nYm6tmLklrJecp6CaWR0K1XiYOcjJDTdpBTI-e1zEbc6iHnBaOJCmyskjqXC6Jp1SR5Po7N-YRK-qLiL08mBQnc3Rt5MKgR2RQjhrKEmhee3rLrqTLhZKIJIvA_t4bA15Ksi1tVPdQjaAS78janQD0rNpItOXIPWVm9Qv-x-SrR3NvJ5NHtRt8Tgiapbt1HhidLIh133w.");
+        var tiled = new ArcGISTiledMapServiceLayer("https://tiles.arcgis.com/tiles/43oQDcO8lvhTZSOO/arcgis/rest/services/noimages3_19/MapServer?token=Ok7GyEL5jmd33k22CugoQKxHtY1OhC8mTGOpfMOkBQd0L8lrn2eYzNXYAKS1-pZ8b_hG0a-qMBC_dAcYsWhffr1tZnUDWGBlv6c2xufkAuk9VJPFrFhTrf2qn-OahHwh5SdcCsSEYVc59zPL-BERYRAveJD5T17gthNP5CXKDc-dHQtJgyhnX39j1kuor1QnC1Ws4R4kdN-dyC_SQB3a-aoz_rGLaD5efCZ0jxNybsI1bQfJX-qcvslaADpHbNALRQ-TT80efiFgSaIaukjWJ5IGf7JDlRvzuriWpvmBylU.");
         map.addLayer(tiled);
-        //tiled.hide();
+        tiled.hide();
         map.reorderLayer(tiled, 1);
 
 
@@ -272,7 +272,7 @@
                 $("#aarsspan").text((layers[i].title).slice(-4));
                 $("#aarsspan3").text((layers[i].title).slice(-4));
                 $("#aarsdiv").show();
-                $("#nonswipeaar").show();
+                //$("#nonswipeaar").show();
               }
             }
           }
@@ -348,7 +348,7 @@
         $("#aarsdiv").append("<span id='aarsspan'>"+forrige2+"</span>");
 
         $(".handleContainer").append("<div id='aarsdiv2'> </div>");
-        $("#aarsdiv2").append("<span id='aarsspan2'>Nå</span>");
+        $("#aarsdiv2").append("<span id='aarsspan2'>2015</span>");
 
 
       });
