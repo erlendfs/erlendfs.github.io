@@ -5,64 +5,64 @@
 
   <meta charset="utf-8">
   <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+  
+  <link rel="stylesheet" href="https://js.arcgis.com/4.9/esri/css/main.css">
+  <script src="https://js.arcgis.com/4.9/"></script>
   <style>
-    html,
-    body {
-      height: 100%;
-      width: 100%;
-      margin: 0;
-    }
-
-    #viewDiv {
-      float: left;
-      padding: 0;
-      margin: 0;
-      height: 100%;
-      width: 70%;
-    }
-    #comment{
-      float: left;
-      height: 100%;
-      width: 28%;
-    }
-
-    /* On screens that are 992px or less, set the background color to blue */
-    @media screen and (max-width: 992px) {
+      html,
       body {
+        height: 100%;
+        width: 100%;
+        margin: 0;
       }
+
       #viewDiv {
         float: left;
-        height: 65%;
-        width: 100%;
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 70%;
       }
       #comment{
         float: left;
-        height: 33%;
-        width: 100%;
+        height: 100%;
+        width: 28%;
       }
-    }
 
-    /* On screens that are 600px or less, set the background color to olive */
-    @media screen and (max-width: 600px) {
-      body {
-      }    
-      #viewDiv {
-        height: 60%;
-        width: 100%;
+      /* On screens that are 992px or less, set the background color to blue */
+      @media screen and (max-width: 992px) {
+        body {
+        }
+        #viewDiv {
+          float: left;
+          height: 65%;
+          width: 100%;
+        }
+        #comment{
+          float: left;
+          height: 33%;
+          width: 100%;
+        }
       }
-      #comment{
-        height: 38%;
-        width: 100%;
+
+      /* On screens that are 600px or less, set the background color to olive */
+      @media screen and (max-width: 600px) {
+        body {
+        }    
+        #viewDiv {
+          height: 60%;
+          width: 100%;
+        }
+        #comment{
+          height: 38%;
+          width: 100%;
+        }
       }
-    }
 
 
 
 
   </style>
-  <link rel="stylesheet" href="https://js.arcgis.com/4.9/esri/css/main.css">
-  <script src="https://js.arcgis.com/4.9/"></script>
-
   <script type="text/javascript">
 
     require([
@@ -100,6 +100,7 @@
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
   </script>
+
   <div id="viewDiv"></div>
   <div id="comment">
     <div class="fb-comments" data-href="http://kart.sarpsborg.com/app/comment/" data-width="500" data-numposts="5">
