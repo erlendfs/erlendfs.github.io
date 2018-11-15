@@ -10,17 +10,48 @@
     body {
       height: 100%;
       width: 100%;
+      margin: 0;
     }
+
     #viewDiv {
       padding: 0;
       margin: 0;
-      height: 70%;
-      width: 100%;
+      height: 100%;
+      width: 70%;
     }
     #comment{
-      height: 30%;
-      width: 100%;
+      height: 100%;
+      width: 30%;
     }
+
+    /* On screens that are 992px or less, set the background color to blue */
+    @media screen and (max-width: 992px) {
+      body {
+      }
+      #viewDiv {
+        height: 65%;
+        width: 100%;
+      }
+      #comment{
+        height: 35%;
+        width: 100%;
+      }
+    }
+
+    /* On screens that are 600px or less, set the background color to olive */
+    @media screen and (max-width: 600px) {
+      body {
+      }    
+      #viewDiv {
+        height: 60%;
+        width: 100%;
+      }
+      #comment{
+        height: 40%;
+        width: 100%;
+      }
+    }
+
 
 
 
