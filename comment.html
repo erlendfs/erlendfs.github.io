@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DDD Fedback</title>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+  <style>
+    html,
+    body,
+    #viewDiv {
+      padding: 0;
+      margin: 0;
+      height: 90%;
+      width: 100%;
+    }
+    #comment{
+      height: auto;
+      width: 100%;
+    }
+
+
+
+  </style>
+  <link rel="stylesheet" href="https://js.arcgis.com/4.9/esri/css/main.css">
+  <script src="https://js.arcgis.com/4.9/"></script>
+
+  <script type="text/javascript">
+
+    require([
+      "esri/WebScene",
+      "esri/views/SceneView",
+      "esri/layers/SceneLayer",
+      "esri/widgets/Legend"
+    ], function(WebScene, SceneView, SceneLayer, Legend) {
+
+
+
+      var webscene = new WebScene({
+        portalItem: {
+          id: "7cc83e9889a74c408d480331ae1c63dc"
+        }
+
+      });
+
+      var view = new SceneView({
+        container: "viewDiv",
+        map: webscene
+      });
+
+    });
+  </script>
+</head>
+<body>
+  <div id="viewDiv"></div>
+  <div id="comment"></div>
+
+</body>
+</html>
