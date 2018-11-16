@@ -42,6 +42,7 @@
         width: 30px;
         position: absolute;
         z-index: 9000;
+        box-shadow: 1px 1px 1px grey;
       }
       #knapp_esc{
         bottom: -40px;
@@ -126,8 +127,8 @@
           console.log(hoyde);
           $(".esri-ui-top-right").hide();
           $(".esri-ui-top-right").append("<div id='knapp_esc'>&times;</div>");
-          $(".esri-ui-corner-container").append("<div id='knapp_opn'><img src='layer_svg_4.svg'/></div>")
-          $("#knapp_opn").hide();
+          $(".esri-ui-corner-container").append("<div id='knapp_opn'><img src='layerlist.svg'/></div>")
+
 
 
           $("#knapp_esc").on('click', function(){
