@@ -72,8 +72,9 @@
       "esri/WebScene",
       "esri/views/SceneView",
       "esri/layers/SceneLayer",
-      "esri/widgets/Legend"
-    ], function(WebScene, SceneView, SceneLayer, Legend) {
+      "esri/widgets/Legend",
+      "esri/widgets/LayerList"
+    ], function(WebScene, SceneView, SceneLayer, Legend, LayerList) {
 
 
 
@@ -88,6 +89,16 @@
         container: "viewDiv",
         map: webscene
       });
+
+      view.when(function() {
+        var layerList = new LayerList({
+                view: view
+        });
+        view.ui.add(layerList, "top-right");
+      });
+      
+      // Adds widget below other elements in the top left corner of the view
+
 
     });
   </script>
