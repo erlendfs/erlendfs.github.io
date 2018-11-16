@@ -8,6 +8,7 @@
   
   <link rel="stylesheet" href="https://js.arcgis.com/4.9/esri/css/main.css">
   <script src="https://js.arcgis.com/4.9/"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <style>
       html,
       body {
@@ -31,6 +32,32 @@
         height: 100%;
         width: 28%;
       }
+      #knapp_esc, #knapp_opn {
+        pointer-events: auto;
+        font-size: x-large;
+        text-align: center;
+        border: 1px solid #dfdfdf;
+        background: white;
+        height: 30px;
+        width: 30px;
+        position: absolute;
+        z-index: 9000;
+      }
+      #knapp_esc{
+        bottom: -40px;
+      }
+      #knapp_opn {
+        right: 0px;
+        background-image: 'layers.png';
+      }
+      #knapp_esc:hover {
+        cursor: pointer;
+      }
+      #knapp_opn:hover {
+        cursor: pointer;
+      }
+
+
 
       /* On screens that are 992px or less, set the background color to blue */
       @media screen and (max-width: 992px) {
@@ -67,40 +94,60 @@
 
   </style>
   <script type="text/javascript">
+    $(function() {
+      require([
+        "esri/WebScene",
+        "esri/views/SceneView",
+        "esri/layers/SceneLayer",
+        "esri/widgets/Legend",
+        "esri/widgets/LayerList"
+      ], function(WebScene, SceneView, SceneLayer, Legend, LayerList) {
 
-    require([
-      "esri/WebScene",
-      "esri/views/SceneView",
-      "esri/layers/SceneLayer",
-      "esri/widgets/Legend",
-      "esri/widgets/LayerList"
-    ], function(WebScene, SceneView, SceneLayer, Legend, LayerList) {
 
 
+        var webscene = new WebScene({
+          portalItem: {
+            id: "7cc83e9889a74c408d480331ae1c63dc"
+          }
 
-      var webscene = new WebScene({
-        portalItem: {
-          id: "7cc83e9889a74c408d480331ae1c63dc"
-        }
-
-      });
-
-      var view = new SceneView({
-        container: "viewDiv",
-        map: webscene
-      });
-
-      view.when(function() {
-        var layerList = new LayerList({
-                view: view
         });
-        view.ui.add(layerList, "top-right");
-      });
-      
-      // Adds widget below other elements in the top left corner of the view
 
+        var view = new SceneView({
+          container: "viewDiv",
+          map: webscene
+        });
+
+        view.when(function() {
+          var layerList = new LayerList({
+                  view: view
+          });
+          view.ui.add(layerList, "top-right");
+          let hoyde = $(".esri-ui-top-right").height();
+          console.log(hoyde);
+          $(".esri-ui-top-right").hide();
+          $(".esri-ui-top-right").append("<div id='knapp_esc'>&times;</div>");
+          $(".esri-ui-corner-container").append("<div id='knapp_opn'><img src='layer_svg_4.svg'/></div>")
+          $("#knapp_opn").hide();
+
+
+          $("#knapp_esc").on('click', function(){
+            $(".esri-ui-top-right").hide(); 
+            $("#knapp_opn").show();
+
+            
+          });
+          $("#knapp_opn").on('click', function(){
+            $(".esri-ui-top-right").show();
+            $("#knapp_opn").hide();
+          });
+
+        });
+      });
+
+      
 
     });
+    
   </script>
 </head>
 <body>
@@ -115,7 +162,9 @@
   }(document, 'script', 'facebook-jssdk'));
   </script>
 
-  <div id="viewDiv"></div>
+  <div id="viewDiv">
+
+  </div>
   <div id="comment">
     <div class="fb-comments" data-href="http://kart.sarpsborg.com/app/comment/" data-width="100%" data-numposts="5">
     </div>
