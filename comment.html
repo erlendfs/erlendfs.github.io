@@ -24,8 +24,10 @@
         float: left;
         padding: 0;
         margin: 0;
-        height: 100%;
-        width: 70%;
+        height: -webkit-calc(100% - 70px);
+        height: -moz-calc(100% - 70px);
+        height: calc(100% - 70px);
+        width: 100%;
       }
       #comment{
         float: left;
@@ -57,6 +59,62 @@
       #knapp_opn:hover {
         cursor: pointer;
       }
+
+      .cont {
+        height: 100%;
+        width: 70%;
+      }
+      #tittel {
+        height: 70px;
+        background-color: #007aad;
+      }
+      .flex-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #navn {
+        width: 70%;
+        height: 100%;
+        float: left;
+        font-size: xx-large;
+        font-family: sans-serif;
+        color: white;
+      }
+      .lenker {
+        width: 30%;
+        height: 100%;
+        float: left;
+        font-size: large;
+        font-family: sans-serif;
+        color: black;
+      }
+      .lenker, #navn {
+
+        /* Internet Explorer 10 */
+        display:-ms-flexbox;
+        -ms-flex-pack:center;
+        -ms-flex-align:center;
+
+        /* Firefox */
+        display:-moz-box;
+        -moz-box-pack:center;
+        -moz-box-align:center;
+
+        /* Safari, Opera, and Chrome */
+        display:-webkit-box;
+        -webkit-box-pack:center;
+        -webkit-box-align:center;
+
+        /* W3C */
+        display:box;
+        box-pack:center;
+        box-align:center;
+      }
+
+
+
 
 
 
@@ -163,7 +221,16 @@
   }(document, 'script', 'facebook-jssdk'));
   </script>
 
-  <div id="viewDiv">
+  <div class="cont">
+    <div id="tittel" class="flex-container">
+      <div id="navn" class="flex-item">Grålum Allé</div>
+      <div class="lenker flex-item">
+        <span><a href="http://webhotel3.gisline.no/webplan_0105/gl_planarkiv.aspx?planid=22076">Plandokumentene</a></span>
+      </div>
+    </div>
+    <div id="viewDiv"></div>
+  </div>
+  
 
   </div>
   <div id="comment">
